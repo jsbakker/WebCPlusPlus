@@ -1,0 +1,105 @@
+#!/bin/sh
+
+# webcpp curses UI script v1.5
+# by Jeffery Bakker 2001
+# last updated August 25th, 2002
+
+# version number and default installation directory ----------
+VER="0.8.3"
+INFILE="somefile.c"
+OUTFILE="somefile.c.htm"
+FLAGS=""
+COLOUR=""
+SCHEME=""
+
+# loop the menu ----------------------------------------------
+while [ output != "4" ]; do
+
+if [ "$COLOUR" != "" ]; then
+SCHEME="-c=$COLOUR"
+fi
+
+dialog --backtitle "Web C Plus Plus v$VER  Copyright (C)2001-2003 Jeffrey Bakker" \
+       --title "Webcpp" \
+       --menu "only steps 1 & 5 are required" 16 60 10 \
+         1 "Input  file       ($INFILE)" \
+         2 "Output file       ($OUTFILE)" \
+         3 "Theme  file       ($COLOUR)" \
+         4 "Options           ($FLAGS)" \
+         5 "Begin conversion" \
+         6 "Do a directory" \
+         7 "Help!" \
+         8 "Exit" 2> .tempfile
+         output=`cat .tempfile`
+         rm -f .tempfile
+
+
+# if Number 1 was chosen, ask for the directory ---------------
+if [ "$output" = "1" ]; then
+  dialog --inputbox "source code input file:" 10 60 $INFILE 2> .tempfile2
+  INFILE=`cat .tempfile2`
+  rm -f .tempfile2
+  OUTFILE="$INFILE.html"
+fi
+
+
+# if Number 2 was chosen, ask for the directory ---------------
+if [ "$output" = "2" ]; then
+  dialog --inputbox "html output file:" 10 60 $OUTFILE 2> .tempfile3
+  OUTFILE=`cat .tempfile3`
+  rm -f .tempfile3
+fi
+
+
+# if 3 was chosen....      ------------------------------------
+if [ "$output" = "3" ]; then
+  dialog --inputbox "Syntax Colour Scheme file:" 10 60 $COLOUR 2> .tmpcolour
+  COLOUR=`cat .tmpcolour`
+  rm -f .tmpcolour
+fi
+
+
+# if 4 was chosen....      ------------------------------------
+if [ "$output" = "4" ]; then
+  dialog --inputbox "flags:" 10 60 $FLAGS 2> .flags
+  FLAGS=`cat .flags`
+  rm -f .flags
+fi
+
+
+# if 5 was chosen ---------------------------------------------
+if [ "$output" = "5" ]; then
+webcpp $INFILE $OUTFILE $FLAGS $SCHEME && dialog --msgbox "HTML file generated" 5 40 || \
+dialog --msgbox "Unsuccessful. :(" 5 40
+fi
+
+
+# if 6 was chosen ---------------------------------------------
+if [ "$output" = "6" ]; then
+
+dialog --inputbox "Enter the directory to convert:" 10 60 "./" 2> .dirt
+WHOLE_DIR=`cat .dirt`
+rm -f .dirt
+
+webcpp "$WHOLE_DIR/*" -A $FLAGS $SCHEME && dialog --msgbox "HTML files in $WHOLE_DIR generated" 5 40 || \
+dialog --msgbox "Unsuccessful. :(" 5 40
+
+fi
+
+
+# exit if "Help" was chosen -----------------------------------
+if [ "$output" = "7" ]; then
+clear
+webcpp
+echo "Press 'Enter' key to continue..."
+read
+fi
+
+
+# exit if "Exit" was chosen -----------------------------------
+if [ "$output" = "8" ]; then
+exit 0
+fi
+
+done
+

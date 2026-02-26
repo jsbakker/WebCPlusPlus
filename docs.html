@@ -1,0 +1,506 @@
+<html>
+<head>
+<title>Web C Plus Plus Documentation</title>
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#000000" vlink="#000000" alink="#ccddff">
+
+<font color=#000000 size=+2><b>Web C Plus Plus 0.8.2 Manual</b></font><br>
+<tt>By jeffrey bakker &lt;jefskey at yahoo dot com&gt;
+<hr width=100% color=#0000bb size=8>
+<br>
+Document version 2.1.0<br>
+Document created 8.3.2001<br>
+Document last modified 8.5.2003<br>
+<br><br>
+</tt>
+<br>
+<table cellpadding=5 cellspacing=2>
+<tr bgcolor=#ccddff><td>
+<b>
+<a name="top">&lt;TABLE OF CONTENTS/&gt;<a>
+</b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+<font size=+1>
+<ol>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#pre">Prerequisites</a></li>
+  <li><a href="#usage">General Usage</a></li>
+  <li><a href="#extensions">Filetype Support</a></li>
+  <li><a href="#inline">Inline Languages</a></li>
+  <li><a href="#hyper">Hyperlinking and HTML tags</a></li>
+  <li><a href="#redirect">I/O Redirection</a></li>
+  <li><a href="#schemes">Creating Colour Schemes</a></li>
+  <li><a href="#hex">Hexidecimal Colours</a></li>
+</ol>
+</font>
+</td></tr>
+</table>
+<br><br>
+<center>
+
+<table width=100% cellpadding=5 cellspacing=2>
+		
+<tr bgcolor=#ccddff><td>
+<b><a NAME="intro">INTRODUCTION</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+A simple description from any free software download site will tell you that webcpp converts source code to syntax highlighted HTML, and supports multiple languages and also colour schemes.
+And maybe that's all you're looking for, but there is a whole lot more to webcpp than just that. It's likely that webcpp even has features or functionality that you wouldn't have expected...
+<ul>
+<li>Specific support for over 30 programming, scripting, and shading languages</li>
+<li>An 11-element syntax highlighting engine</li>
+<li>Dynamic colour schemes using embedded Stylesheets, or external Stylesheets</li>
+<li>Batch conversions</li>
+<li>Automatic filetype detection for higlighting</li>
+<li>Filetype forcing for syntax highlighting</li>
+<li>Automatic #include file hyperlinking and file generation</li>
+<li>Piping the input or output to or from STDIN/STDOUT to collaborate with other programs</li>
+<li>The ability of allowing custom HTML tags to be added</li>
+<li>Generic support for unknown text based files</li>
+<li>Available on various operating systems</li>
+</ul>
+<b>Command line</b><br>
+Whether you're using webcpp for Windows or on some type of Unix, the webcpp engine will be used the same way: through the command-line. In either Windows or Unix, the format of the commands will be the same. For Windows, there will be a shortcut to it at the Start Menu -> Programs -> Webcpp -> Webcpp Command Console. Launch this to start the webcpp command line, then you'll be ready to start typing in webcpp commands.
+<br><br>
+<b>User interfaces</b><br>
+If you're still not convinced about using a powerful command-line program, don't close this window and never come back just yet! There are programs which provide a graphical interface and pass the commands to webcpp. There is one made in Gnome for UNIX (Webcpp GnoGUI), and one made for Windows (called Webcpp WinGUI). 
+These programs are capable of sending options and even custom options to webcpp, but they lack in some areas such as I/O redirection, which is a powerful feature because it lets you streamline the output to another program and vice versa. 
+There is also a standalone Webcpp that has the engine built in (called Webcpp for Win32), you can take a look at the screenshots in the manual for the windows one <a href="http://webcpp.sourceforge.net/guidocs.php">here</a>.
+<br><br>
+<b>Windows users</b><br>
+Webcpp already includes the WinGUI program (mentioned above), and another program, WinMkScs2, for visually creating and editing colour shemes. How to use these programs are out of the scope of this document, there is separate documentation for each. However, the information in this document will provide you with a better understanding of what's going on behind the scenes in these graphical tools.
+</td></tr>
+
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="pre">PREREQUISITES</b></a>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+<b>Hardware</b><br>
+Even a 386 or 486 computer with a keyboard and monitor will do just fine, no mouse needed. And it's okay if you have something alot better, don't go tyring to replace your computer if you "only" have an Athlon or Pentium 4. Hard drive space is not a big concern, as the Unix version is under 400KB (including schemes and documentation), and the Windows version is just over 1MB (including source code, schemes, and docementaion).
+<br><br>
+<b>Software</b><br>
+Operating systems that are supported are Windows, Linux, and quite possibly many other variants of Unix. Webcpp comes in pre-compiled binary form for FreeBSD, Linux, and Windows on the i386 platform. If you have an operating system which is neither 
+of these, you can download the source and compile it, which is actually recommended over binary distribution. It <i>should</i> compile on most 
+*NIX systems, given that you have the proper compiler tools (<a href="http://gcc.gnu.org">gcc3 or later</a>). There is even a <a href="http://aixpdslib.seas.ucla.edu/packages/webcpp.html">site</a> that has a binary of Webcpp for AIX.
+<br><br>
+As for additional software (other than operating system or compiler), you should have a web browser. Technically, you don't need a browser to use webcpp, but if you want to look at the output you will definitely want a web broswer. The browser must support Cascading Stylesheets (and every modern browser does), as webcpp uses stylesheets to store the syntax highlighting information. 
+It is also a good idea to have the latest stable version of webcpp installed on your operating system. The latest stable version can always be found at 
+<a href="http://webcpp.sourceforge.net/download.php">http://webcpp.sourceforge.net/download.php</a>.
+<br><br>
+<b>Experience</b><br>
+I strongly suggest that you at least know how to use the basics of DOS or UNIX (if so, then you can skip this paragraph). Familiarity with any type of command prompt is helpful. This way, you'll find that using webcpp is very easy. 
+Of course, since most of the target audience are software engineers and web developers, I'm sure that using the command line pales in comparison to the complexity of your work. Yet, there may be those of you that have never used computers during the DOS or UNIX days, and have only used Windows exclusively.
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="usage">GENERAL USAGE</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+
+To use webcpp, type the following format to the command line
+(without any brackets):
+<pre>
+ webcpp &lt;infile&gt; &lt;outfile&gt; [options...]
+</pre>
+where &lt;infile&gt; is the name of your source file to read, and &lt;outfile&gt; is the name of the HTML file to create, and [options...] are optional (see options table).
+<br><br>
+Options can be parameters to pass to webcpp (such as scheme files or filetype forcing), but options can also be switches to turn features on or off.  
+There are also options that are special switches to use in place of filenames that make webcpp do some very neat tricks, and make it a handy, "must-have" tool. These options can be viewed any time by typing the `webcpp` command without any arguments.
+<br><br>
+<b>Options Table</b>
+<pre>
+  -c=&lt;scheme&gt;        Use a webcpp colour scheme.
+  -w=&lt;scheme&gt;        The works, same as -m -l -a -h -c=&lt;scheme&gt;.
+  -i=&lt;filename&gt;      Use an image for the background.
+  -t=&lt;width&gt;         Convert tabs to spaces using the specified width.
+  -x=&lt;extension&gt;     Force the filetype for syntax highlighting.
+
+  -X,--external-css  Generate an external stylesheet.
+  -s,--snippet-only  Don't generate HTML or BODY tags.
+  -w,--the-works     The works (sans scheme) -m -l -h -a.
+  -l,--line-numbers  Print the line numbers in the left margin.
+  -a,--anchor-lines  Create anchors to line numbers.
+  -h,--hyperinclude  Create hyperlinks to #include files (C/C++).
+  -H,--superinclude  Hyperinclude that recursively generates files.
+  -t,--tabs-spaces   Convert tabs to spaces (use for Opera).
+  -m,--made-with     Show made with webcpp footer.
+  -A,--auto          Automatic naming in place of the output file.
+  - ,--pipe          Use STDIN or STDOUT in place of the filename.
+</pre>
+Note that these switches are toggle switches. If you are using the -w or -w=<scheme> switch, it toggles on the -m, -l, -h, & -a switches. 
+You can use boolean math here to exclude a switch from the works. Say for example you want to use -m, -l, & -a,  but not -h...what 
+you can do is use -w -h, which will equivalent to the works but minus the hyperinclude. This also means that if you have two of the same switch, they'll cancel eachother out.
+<br><br>
+<b>Generating Code Snippets</b><br>
+If you don't want to make standalone HTML files, but just pieces of HTML code that can be pasted into your own .html files, then use the "-s" or "--snippet-only" option. This will generate code without HTML, HEAD, or BODY tags.
+<br><br>
+<b>Using colour themes</b><br>
+To use a theme, all is needed is a theme file, and to use one of the many theme options. Webcpp uses SCS (Syntax Colour Sheme) files to indentify colours. 
+Passing the theme name with the <tt>-c=shceme</tt> or <tt>-w=scheme</tt> options is all that is required. You don't need to use the ".scs" part, but just make sure it's pointing to the right directory where the scs file is. 
+Note that you can also use the <tt>-c=shceme</tt> and <tt>-w=scheme</tt> options with uppercase letters. Using an uppercase 'C' or 'W' will 
+make webcpp generate an external Stylesheet for the colour scheme. The Stylesheet should be placed in the same directory of the output file. 
+Another way of making external Stylesheets is to use the <tt>-X</tt> switch (just don't do both, or they cancel eachother out). 
+Webcpp already comes with over 50 colour schemes. They are installed in /usr/local/share/webcpp/ on
+Unix, and C:\Program Files\Jeffrey Bakker\Webcpp\ in Windows by default. Creating your own themes is covered <a href="#schemes">later</a> in this manual.
+<br><br>
+<b>Special file switches</b><br>
+For the input filename, there can be wildcards, if you need to process many files at once. To use the wildcard, you must put the wildcard phrase in quotes like this: <tt>"*.cpp"</tt>. 
+The <tt>-A</tt> or <tt>--auto</tt> can be used for the output filename to let webcpp decide what the file should be named. Webcpp will use the input filename, then append a ".html" to come up with the output filename. 
+So if you did something like this: <tt>webcpp "*.h *.cpp" -A</tt>, you can process all the C++ source files in the current directory and automatically name the output files. 
+There is also the <tt>-</tt> or <tt>--pipe</tt> file switch. This is a whole topic within itself, and will be discussed in <a href="#redirect">I/O redirection</a>.
+<br><br><b>File flags</b><br>
+A webcpp file flag is simply a colon followed by a character at the end of the output filename. Currently, there is ':f' to <u>f</u>orce overwrite on an existing file, and ':k' to <u>k</u>eep the existing file and abort. An example would be: <tt>webcpp main.cpp main.cpp.html:f</tt>. If no flag is given, webcpp will do the normal and ask you whether or not you would like to overwrite if the file does happen to exist. If you use an invalid flag, you will get an I/O mode error.
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="extensions">FILETYPE SUPPORT</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+
+Remember, despite its name, web c plus plus can also handle many languages other than C++. And you don't have to tell it whether to use Java or C or C++ highlighting, because webcpp will determine the file by it's extension (.java, .cpp, .h, .c). Just don't worry about it, it's all taken care of by autodetection. Here are the supported types in groups (you can always see this list by typing `webcpp --languages`) :
+
+<br><br>
+<table>
+<tr bgcolor=#ccddff>
+<td>
+<b>Language</b>
+</td><td>
+<b>Filter</b>
+</td></tr>
+<tr><td>
+Ada95</td><td>*.adb,*.ads,*.ali</td>
+</tr><tr><td>
+Assembly</td><td>*.asm,*.s</td>
+</tr><tr><td>
+Asp</td><td>*.asp,*.asa</td>
+</tr><tr><td>
+Basic</td><td>*.bas</td>
+</tr><tr><td>
+C Source</td><td>*.c,*.rc</td>
+</tr><tr><td>
+C#</td><td>*.cs</td>
+</tr><tr><td>
+C++ Source</td><td>*.cc,*.cpp,*.cxx</td>
+</tr><tr><td>
+C/C++ Header</td><td>*.h,*.hh,*.hpp,*.hxx</td>
+</tr><tr><td>
+Objective-C</td><td>*.m</td>
+</tr><tr><td>
+Cg (Nvidia)</td><td>*.cg</td>
+</tr><tr><td>
+CLIPS (Nasa)</td><td>*.clp</td>
+</tr><tr><td>
+DOS Batch</td><td>*.bat,*.cmd</td>
+</tr><tr><td>
+Euphoria</td><td>*.e,*.eu,*.ex</td>
+</tr><tr><td>
+Haskell</td><td>*.hs,*.lhs</td>
+</tr><tr><td>
+Java</td><td>*.java</td>
+</tr><tr><td>
+JavaScript</td><td>*.js</td>
+</tr><tr><td>
+Fortran</td><td>*.f,*.f77,*.f90,*.for,*.ftn</td>
+</tr><tr><td>
+Markup</td><td>*.htm,*.html,*.shtml,*.sgml,*.xml</td>
+</tr><tr><td>
+Modula2</td><td>*.def,*.mod</td>
+</tr><tr><td>
+Pascal</td><td>*.pas</td>
+</tr><tr><td>
+Perl Script</td><td>*.cgi,*.pl,*.plx,*.plex,*.pm</td>
+</tr><tr><td>
+PHP Script</td><td>*.inc,*.php,*.php3,*.php4</td>
+</tr><tr><td>
+Power Builder 6</td><td>*.pbl, *.pbr</td>
+</tr><tr><td>
+Python Script</td><td>*.py, *.pyw</td>
+</tr><tr><td>
+Renderman</td><td>*.rib,*.sl</td>
+</tr><tr><td>
+Ruby</td><td>*.rb</td>
+</tr><tr><td>
+SQL</td><td>*.sql</td>
+</tr><tr><td>
+Tcl</td><td>*.tcl,*.tk</td>
+</tr><tr><td>
+Unix Shell</td><td>*.sh</td>
+</tr><tr><td>
+Unreal Script</td><td>*.uc</td>
+</tr><tr><td>
+VHDL</td><td>*.v,*.vhd,*.vhdl</td>
+</tr>
+</table>
+<br> <b>Forcing filetypes</b><br>
+As described above, webcpp automatically detects the filetype from the extension of the given input file. 
+If the extension of your source file is none of the above, webcpp will still generate an html file, but just not with any syntax highlighting. This means you can create html files from plain text files. 
+You can always force the filetype with the <tt>-x=&lt;extension&gt;</tt> option if webcpp can't recognize your file or if you'd like to highlight it as another language.
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="inline">INLINE LANGUAGES</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+So, how about those languages that are inlined into source code from another language? Yes, Webcpp can do that too...best of all, it does it automatically. The new engine makes it possible for 2 or more languages to access the same I/O object, meaning, it can support inline code for different languages. Currently, Webcpp supports MSVC/Borland style inline Assembly code within C++ files, and JavaScript code in HTML files.
+<br><br>
+Webcpp will search where the other language starts, and parse it until it ends. The start for a block of Assembly code in C++ is "asm" or "__asm", and the end is designated by a "}". For JavaScript, the start is "text/javascript", like in the phrase '&lt;script type="text/javascript"&gt;' and the end is designated by "/script".
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="hyper">HYPERLINKING YOUR CODE AND HTML TAGS</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+<b>HyperInclude</b><br>
+Using the <tt>-h</tt> or <tt>--hyperinclude</tt> switch will automatically generate htyperlinks to html files of your <tt>#include</tt> statements in C/C++. for example, if you had something like <tt>#include "socket.h"</tt> in your source code, it will automatically link the phrase "socket.h" to socket.h.html. 
+This is especially a very useful feature if you are generating HTML for whole directories of C/C++ code, because you can have all your files linked together.
+<br><br>
+<b>Anchoring lines</b><br>
+You can also have webcpp automatically anchor code by using the <tt>-a</tt> or <tt>--anchor-lines</tt> switch. This powerful switch will create an anchor for every line in your code, named after the line number. 
+This means you can jump to any line of code in the file by using its line number. For example, the link http://foo.bar.com/code.c.html#line203 will directly jump to line 203 of the code.c HTML file.
+<br><br>
+<b>Labels for tags</b><br>
+If you are attracted to the two features above, but still need something that specifically fits your needs, you can use custom anchoring and linking. On any line of your source code, you can put a label in which can name the line, or link to another line of code. There are two labels you can use... 
+The <tt>NameMe:</tt> label will name a line of code, and the <tt>LinkMe:</tt> label will create a hyperlink. To make sure the labels won't effect the syntax of your code, place the labels in a comment. Here is an example of naming and linking lines of code:
+<pre>
+class Person  // NameMe:Person
+{
+ public:
+	Person();
+ ...
+};
+
+class Student
+ : public Person {  // LinkMe:#Person
+ public:
+	Student();
+ ...
+};
+
+
+...
+//TagMe:&lt;hr noshade&gt;&lt;a href="http://webcpp.sf.net"&gt;Get Webcpp!&lt;/a&gt;&lt;hr noshade&gt;
+...
+</pre>
+And yet, there is a third type of webcpp label, <tt>TagMe:</tt>, which simlpy prevents webcpp from stripping any meaning of HTML tags on a single line. 
+By default, webcpp <b>has</b> to strip HTML to be able to parse and highlight source code properly. However, there may come a time when you actually want your own custom HTML 
+tags in your generated document, and this is when you use <tt>TagMe:</tt>, you can even use it to insert images. The webcpp tags are also self-cleaning, 
+meaning that the label itself will erase itself after processing its task.
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="redirect">I/O REDIRECTION</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+
+One of the most powerful things about webcpp is its ability to integrate with other command-line tools for data piping. This will allow you to pipe data in from another program instead of a file, and vice versa (pipe data to other programs).
+<br><br>
+
+It is possible to redirect the Input and/or Output of webcpp to the STDIN or STDOUT. This feature can be very useful to interact with other UNIX utilities. The use of the <tt>"-"</tt> or <tt>"--pipe"</tt> switch in place of the filename will redirect the input or output.
+<br><br>
+<b>Standard in</b><br>
+Be careful when you're redirecting input from the STDIN. Remember that webcpp determines the filetype by extension, and uses this determine how to do the syntax highlighting. When you use the STDIN as input, there is no filetype specified. To use syntax highlighting when you're using STDIN as your input, you must pass the filetype using the <tt>-x=&lt;extension&gt;</tt> option to force the filetype.
+<br><br>
+The following command will generate a single html file from all the source and include files in the directory:
+<pre>
+ $ cat *.h *.cpp | webcpp - everything.html -x=cpp
+</pre>
+<br>
+Or generate an HTML file of the contents in your home directory:
+<pre>
+ $ ls $home | webcpp - myfiles.html
+</pre>
+<b>Standard out and standard error</b><br>
+And there's also redirecting the output to STDOUT. Just use the redirector switch as the output filename, and webcpp will print all the output to the screen (or whatever your operating environment is using as STDOUT). 
+From here, you can use the operating system to catch the output and decide what to do with it. Take note that webcpp prints messages to the screen like "C++ file detected" and "57% complete @ line 160". Now you may be thinking 
+"Then how will I separate webcpp's messages from the generated output?". All messages from webcpp are printed to STDERR, so the answer is to use your operating system to handle it. For instance if you append <tt>&gt;output.html</tt> to your command, 
+all STDOUT will be caught and placed into a file called output.html. Similarly, if <tt>2&gt;messages.txt</tt> is used, then all webcpp messages to STDERR will be caught and placed in a messages.txt file. This works in both UNIX and DOS. Now, what if 
+you needed the output printed to your screen, but didn't want to see webcpp's messages on the screen neither have them stored in a messages.txt file? In UNIX, you can execute this:
+<pre>
+webcpp main.c --pipe 2>/dev/null
+</pre>
+This will process main.c and print the HTMLized output to the screen, and send all of webcpp's messages to the "black hole".
+</td></tr> <tr bgcolor=#ccddff><td>
+<b><a NAME="schemes">CREATING COLOUR SCHEMES</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+If you know how hexidecimal works, then creating colour schemes for webcpp is simple. If you don't, then don't worry, I will also make an attempt to explain it in the <a href="#hex">next</a> section.
+<br><br>
+<b>The format</b><br>
+Webcpp uses its own file format, Scs2 (Syntax Colour Scheme version 2), to store colour scheme information. The file extension for these files is *.Scs2. 
+To make your own Syntax Colour Scheme, you should first learn the basics of the file format. The Scs2 format is now stored as XML data, meaning that the values are stored between tags. Because of it's nature, it is easy to read XML, even to those who have never seen markup language code before. 
+Since XML is a standard, that is also why it has been chosen to base the Scs2 format on. And unlike the original SCS format (from older versions of webcpp), the highlighting data does not need to be in any specific order. Here is what the inside of an Scs2 file is like...
+<br><br>
+<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE SyntaxColourScheme2 SYSTEM "WebcppScheme2.dtd"&gt;
+&lt;SyntaxColourScheme2&gt;
+  &lt;bgcolor&gt;f1f1f1&lt;/bgcolor&gt;
+  &lt;preproc&gt;a900a9&lt;/preproc&gt;
+  &lt;nortext&gt;000000&lt;/nortext&gt;
+  &lt;symbols&gt;0077dd&lt;/symbols&gt;
+  &lt;keyword&gt;224fff&lt;/keyword&gt;
+  &lt;keytype&gt;ff9933&lt;/keytype&gt;
+  &lt;integer&gt;ff0032&lt;/integer&gt;
+  &lt;floatpt&gt;ff23a6&lt;/floatpt&gt;
+  &lt;dblquot&gt;00b800&lt;/dblquot&gt;
+  &lt;sinquot&gt;00b86b&lt;/sinquot&gt;
+  &lt;comment&gt;666666&lt;/comment&gt;
+  &lt;background&gt;C:\Backgrounds\looseleaf3low.bmp&lt;/background&gt;
+&lt;/SyntaxColourScheme2&gt;
+</pre>
+Notice that the first two lines identify the format of the file, this is standard for XML. The third and the last line envelopes the document data itself as a whole. The lines in between the third and last represent the colour scheme elements. Also notice that there is no ambiguity here, each piece of data is identified by its surrounding tags. 
+The values of the colour element data are stored as hexidecmial characters, and can start with a '#' symbol, but it is not necessary to do so. Each of the elements will be explained below (and remember, they don't have to be in any specific order) :
+<br><br>
+<ul>
+<li><b>bgcolor</b> - the background colour of the html file
+<li><b>preproc</b> - the colour of preprocessor statements, backquoted strings, and $,@,% variables (language specific)
+<li><b>nortext</b> - the colour of the normal, non-highlighted text
+<li><b>symbols</b> - the colour of symbols (eg. =,+,-,!=,++,etc.)
+
+
+<li><b>keyword</b> - the colour of the language's keywords
+<li><b>keytype</b> - the colour of the language's primitive data types, or commands for scripting languages
+<li><b>integer</b> - the colour of integer numbers
+<li><b>floatpt</b> - the colour of floating point numbers
+<li><b>dblquot</b> - the colour of double quoted strings
+<li><b>sinquot</b> - the colour of single quoted strings
+<li><b>comment</b> - the colour of the comments in te code
+<li><b>background</b> - a link to a background picture file (optional)
+</ul>
+<br>
+<b>Stylesheets</b><br>
+Webcpp uses the Scs2 information to generate Cascading Stylesheets on-the-fly when it's creating HTML files. Webcpp stylesheet data is put into a webcpp namespace, so the data will not interfere with other stylesheet information on your webpage. The Stylesheet information can be generated for use in two ways: 
+1) Embedded Stylesheet, and 2) External Stylesheet. So, which is "better" to use? Well, embedded stylesheets are good, because the HTML file has no dependency on any other external files. However, external can make it easier to change themes, and also is good if you have many HTML files using the same scheme, they can all share the same Stylesheet. 
+As mentioned above, stylesheets are automatically generated by webcpp and placed in the same directory as the output file. However, if you'd like to create your own, there is a format to follow. This is a stylesheet generated by webcpp...
+<br><br>
+<pre>
+/*
+Webcpp v0.8.0 compatible StyleSheet
+http://webcpp.sf.net
+Theme: C:\bg.Scs2
+*/
+
+div.webcpp
+{
+background-color: #f1f1f1;
+background-image: url("C:\Backgrounds\looseleaf3low.bmp");
+background-attachment: fixed
+}
+
+.webcpp a:link    {color:#00b800}
+.webcpp a:visited {color:#666666}
+.webcpp a:active  {color:#224fff}
+.webcpp a:hover   {color:#a900a9}
+
+.webcpp pre
+{
+color: #000000
+}
+
+.webcpp font
+{
+font-size:100%
+}
+
+.webcpp font.symbols
+{
+color: #0077dd
+}
+
+.webcpp font.preproc
+{
+color: #a900a9
+}
+
+.webcpp font.integer
+{
+color: #ff0032
+}
+
+.webcpp font.floatpt
+{
+color: #ff23a6
+}
+
+.webcpp font.dblquot
+{
+color: #00b800
+}
+
+.webcpp font.sinquot
+{
+color: #00b86b
+}
+
+.webcpp font.keyword
+{
+color: #224fff;
+font-weight: bold
+}
+
+.webcpp font.keytype
+{
+color: #ff9933;
+font-weight: bold
+}
+
+.webcpp font.comment
+{
+color: #666666;
+font-style: italic
+}
+</pre>
+<br>
+<b>The original SCS format</b><br>
+Finally, there's the old SCS format, which webcpp still supports. It has 4 less elements than the Scs2 format, and no support for background images. The SCS data has to be in a specific order, and the colours must begin with the '#' symbol. When using an old SCS file, webcpp translates the data, but doesn't make use of the floating point, types, single quotes, and symbol highlighting. These files have the *.scs extension. For historical purposes, here is The anatomy of an SCS file.
+<pre>
+#ffffff
+#00b800
+#000000
+#0000ff
+#a900a9
+#ff0000
+#666666
+</pre>
+The order of the SCS files are as follows...from the top to bottom, they are: Background, Preproceessor, Normal text, Keywords, Numbers, Strings, and Comments.
+<br><br>
+Creating these files is just a matter of knowing what colours you want your code to look like, and a little bit of Hexidecimal knowledge. Feel free to use the above examples as a templates until you get the hang of it. If you use Webcpp on windows, you can use WinMkScs2, which can help you easily create colour schemes the visual way, by using colour pickers or even random colour generation. It can load and save .Scs2 files so they can be modified. WinMkScs2 can also import old .scs files, and export to webcpp 0.8.0 compatible sytlesheets.
+</td></tr>
+
+<tr bgcolor=#ccddff><td>
+<b><a NAME="hex">HEXIDECIMAL COLOURS</a></b>
+</td></tr>
+<tr bgcolor=#e9f1ff><td>
+Just think of hexidecimal colours as a colour mixer. You have red, green, and blue. And you can give each colour a certain value, ranging from 0 to 255, where 0 is the darkest, and 255 is the lightest. Just modify the values to get different colours. But the catch is, that we don't use decimals for these values. Hexidecimal is used instead.
+<br><br>
+Hexidecimal is different from decimal. Decimal goes up to 9, then goes back to 0 and add 1 to the next digit, making it a 10-based number system. Hexidecimal, on the other hand, is 16-based (Hexi-decimal). Let's count to 16 in hex:
+<pre>
+ 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,10
+</pre>
+Here 10 is A, 15 is F, and 16 is 10, and 17 would be 11. 64 would be 41. I guess they do this because it would be more efficient for the computer; you can store a number like 200 by just using 2 digits instead of 3. 
+<br><br>
+Back to the colour mixer thing. Each colour has a value. They are represented with 2 hexidecimal digits, ranging from 00 to FF. If you got the hang of hexidecimal, you may have guessed that FF is actually equal to 255. Red is represented first, then Green, then Blue.
+<pre>
+ <font color=#000000>#000000</font> is black, becuase all red, green and blue values are set to zero.
+ <font color=#ffffff>#ffffff</font> is white, becuase all red, green and blue values are set to max.
+
+ <font color=#ff0000>#ff0000</font> is bright red because the red value is at it's highest, ff(255).
+ <font color=#008100>#008100</font> is green, becuase the green value is 81, which is equivalent to 128 in decimal.
+ <font color=#000040>#000040</font> is about navy or dark blue, because the blue value is rather low.
+</pre>
+If you want something like yellow, you'd have to mix red and green, and if you want orange, you'd do the same, but just add less green...
+<pre>
+ <font color=#ffff00>#ffff00</font> is a bright yellow
+ <font color=#ffbb00>#ffbb00</font> would be a bright orange
+</pre>
+There are so many possible colours with hexidecimal. The best way to learn how to get the colours you want is to experiment with it yourself.
+</td></tr>
+</table>
+</center>
+<br><br>
+<hr width=100% color=#0000bb size=8>
+<font size=-1><i>This document can be found online @ http://webcpp.sourceforge.net/docs.html</i></font>
+</body>
+</html>

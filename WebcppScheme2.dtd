@@ -1,0 +1,12 @@
+<!ELEMENT SyntaxColourScheme2 (bgcolor)>
+<!ELEMENT bgcolor (#PCDATA)>
+<!ELEMENT preproc (#PCDATA)>
+<!ELEMENT nortext (#PCDATA)>
+<!ELEMENT symbols (#PCDATA)>
+<!ELEMENT keyword (#PCDATA)>
+<!ELEMENT keytype (#PCDATA)>
+<!ELEMENT integer (#PCDATA)>
+<!ELEMENT floatpt (#PCDATA)>
+<!ELEMENT dblquot (#PCDATA)>
+<!ELEMENT sinquot (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>

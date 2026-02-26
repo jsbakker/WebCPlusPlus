@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE SyntaxColourScheme2 SYSTEM "WebcppScheme2.dtd">
+<SyntaxColourScheme2>
+  <bgcolor>ffffff</bgcolor>
+  <preproc>620ac6</preproc>
+  <nortext>121b28</nortext>
+  <symbols>121b28</symbols>
+  <keyword>0a7f6d</keyword>
+  <keytype>0a7f6d</keytype>
+  <integer>15fb6b</integer>
+  <floatpt>15fb6b</floatpt>
+  <dblquot>2b83ba</dblquot>
+  <sinquot>2b83ba</sinquot>
+  <comment>90a729</comment>
+</SyntaxColourScheme2>

@@ -1,0 +1,20 @@
+Chris Mcbride <camcbri@ilstu.edu> - found a bug with multiline C comments inside inline C comments
+Guillaume Mendonca <et00mendonca@cpln.ch> - found a bug with multiline C comments inside inline C comments
+Quentin J Sarafinchan <quentinjs@polarware.net> - found SQL freeze with C-Style comments
+Glen Okita <_go@yahoo.com> - found escaped backslash, escaped quote bug in the 0.7.x string highlighting engine
+George Lewis <ghlewis@hotmail.com> - language support for the Euphoria language
+Mark Williams <markdjwilliams at hotmail dot com> - language support for RenderMan shading language
+Matt Runion <mrunion at yahoo dot com> - language support for ASP, ASP/VB style comments, ASP fixes
+Dr. Detlef Groth <dgroth at gmx dot de> - language support for EMF
+Forrest Johnston <forrest.johnston at attbi dot com> - language support for Javascript
+Philippe Torche <philippe.torche at swissonline dot ch> - language support for Power Builder 6
+Daniel Lin <dan at dlin.d2g dot com> - language support for DOS Batch files
+Thomas Hedler <thomas.hedler at fen-net dot de> - language support for IEEE 1076 Very High Speed Integrated Circuit Hardware Description Language
+Walter Maner <maner at cs.bgsu dot edu> - language support for Nasa's CLIPS
+Uwe Koloska <kolosk at users.sourceforge dot net> - useful suggestions (line anchors), bug reports (lonely quote in string), and two patches
+William Shotts <bshotts at clark dot net> - discovered and reported an infinite loop in the shell highlighting
+Mark Tigges <mtigges at home dot com> - suggested Python support, hyperlinks, and ".c++" as a file extension
+Brian Schwarz <brian at bluecollartech dot com> - tested and reported a file bug on Windows2000
+Ryan Phillips <ryan.phillips at csus dot edu> - liked my "golden" scheme so much, he ported it to gvim
+Christopher Trudeau - discovered and reported an infinite loop with multiple escaped quotes inside quotes
+George Orwell - suggested that webcpp should use stylesheets (CSS)
