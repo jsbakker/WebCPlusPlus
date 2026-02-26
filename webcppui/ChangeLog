@@ -1,0 +1,63 @@
+Note: The major version bump from 0.x - 2.x is due to the fact that this rewrite
+is a port of a second generation webcpp tool for Windows.
+
+ (g)WebcppUI
+ v 2.0.1 (12/01/2006)
+
+  - Fixed add files dialog to support multiple file selections.
+  - Added descriptive tooltips.
+
+
+ (g)WebcppUI
+ v 2.0.0 (30/11/2005)
+
+  - Completely redesigned GUI, completely rewritten code in python.
+  - Added support for all the features you'd expect in webcpp 0.8.2 and up.
+  - Added a Scs2 (Syntax Colour Scheme 2) designer for creating/editing schemes.
+  - Added support for batch processing.
+  - New Gtk+ 2.4 (and above) interface.
+
+
+ Webcpp GnoGui
+ v 0.3.3 (07/10/2002)
+
+  - Added support for ASP, RenderMan, and Ruby.
+  - Fixed Line Numbers option.
+  - Webcpp 0.7.8 or later is now required.
+
+
+ v 0.3.2 (03/09/2002)
+
+  - Added support for DOS batch and VHDL.
+  - Added filetype autodetect as a language option.
+  - Output files now have an HTML title on them.
+  - Webcpp 0.7.6 or later is now required.
+
+
+ v 0.3.1 (26/07/2002)
+
+  - Added support for Haskell, Tcl, NVidia's Cg, and NASA's CLIPS language.
+  - Code cleanup inside callbacks.c.
+  - Updated the about box.
+  - Webcpp 0.7.3 or later is now required.
+
+
+ v 0.3.0 (19/07/2002)
+
+  - Added support for Ada95, Basic, Objective C, Fortran, Modula2, Pascal & SQL.
+  - Added option Anchor Lines in place of Backup HTML.
+  - Made tooltips for all the options.
+  - Webcpp 0.7.2 is required.
+
+
+ v 0.2.0 (05/04/2002)
+
+  - Added Assembler, C#, and PHP to the filetype support.
+  - Added "Made with" and "Tabs to spaces" options.
+  - Filetypes are now using the -x=<ext> switch, -t=<ext> will phase out in later webcpp's.
+  - Webcpp 0.6.8 or later is now required.
+
+
+ v 0.1.0
+
+  - Initial release.
