@@ -1,4 +1,3 @@
-
-  TODO:
-
-
+TODO:
+- Modernize C++ Syntax
+- Modernize x-plat build (use CMake)

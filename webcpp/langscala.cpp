@@ -1,5 +1,6 @@
 // The Scala Language definition file for Web C Plus Plus
 // Covers Scala 2 and Scala 3 keywords
+// Webcpp Copyright (C)2001-2004, (C)2026 Jeffrey Bakker
 
 #include "langscala.h"
 

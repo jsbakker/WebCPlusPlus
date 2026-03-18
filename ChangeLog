@@ -1,9 +1,10 @@
- 
-**Note:
-    As of webcpp 0.7.0 and up, g++3 (gcc3) is required to build webcpp
-    use: `/usr/sbin/gcc_select 3` if gcc 2.9x and 3.x reside on the same
-    system to select the default version of the compiler.
 
+ver 0.9.0 (03/17/2026)
+
+  - Fixed freeze or index out of bounds issues when parsing edge cases.
+  - Modernize the syntax highlighting for existing supported languages.
+  - Add multi-line string support for C++, C#, Java, Swift, Perl, PHP, Python, Ruby, Shell.
+  - Add support for F#, Gherkin, Go, Kotlin, Objective-C++, OCaml, R, Rust, Scala, Swift, TypeScript, Vala, Zig, GLSL, HLSL.
 
  ver 0.8.4 (04/01/2004)
 

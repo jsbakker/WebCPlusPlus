@@ -109,7 +109,7 @@ class webcppwnd(libglade.GladeWrapper):
 		try:
 			file = open(self.ScsFile, "r")
 		except IOError:
-			print 'Cannot open file for reading:', self.ScsFile
+			print('Cannot open file for reading:'), self.ScsFile
 			self.set_typical()
 			return
 
@@ -121,7 +121,7 @@ class webcppwnd(libglade.GladeWrapper):
 			tagmatch = re.search('</([a-z]{7})>', scsline, re.IGNORECASE)
 
 			if hexmatch and tagmatch:
-				print tagmatch.group(1), hexmatch.group(1)
+				print(tagmatch.group(1), hexmatch.group(1))
 				self.set_colour_pair(tagmatch.group(1), '#' + hexmatch.group(1))
 
 		file.close()
@@ -151,7 +151,7 @@ class webcppwnd(libglade.GladeWrapper):
 		try:
 			file = open(self.ScsFile, "w")
 		except IOError:
-			print 'Cannot open file for writing:', self.ScsFile
+			print('Cannot open file for writing:', self.ScsFile)
 			self.set_typical()
 			return
 
@@ -632,13 +632,13 @@ class webcppwnd(libglade.GladeWrapper):
 	def colour_file(self, model, path, iter, data):
 
 		command = 'webcpp ' + model.get_value(iter, 0) + data
-		print command
+		print(command)
 		os.system(command)
 
 
 	# formulate webcpp options and prepare processing ======================
 	def on_btnColour_clicked(self, widget, data=None):
-		print 'clicked colour'
+		print('clicked colour')
 
 		options = ' --auto:f'
 
@@ -646,35 +646,35 @@ class webcppwnd(libglade.GladeWrapper):
 			options += ' ' + self.entAdvanced.get_text()
 
 		if self.chkNumbers.get_active():
-			print 'Show Line Numbers is checked.'
+			print('Show Line Numbers is checked.')
 			options += ' -l'
 
 		if self.chkAnchors.get_active():
-			print 'Make Line Anchors is checked.'
+			print('Make Line Anchors is checked.')
 			options += ' -a'
 
 		if self.chkTabSpaces.get_active():
-			print 'Tabs to Spaces is checked.'
+			print('Tabs to Spaces is checked.')
 			options += ' -t'
 
 		if self.chkSnippet.get_active():
-			print 'Snippet Only is checked.'
+			print('Snippet Only is checked.')
 			options += ' -s'
 
 		if self.chkHyper.get_active():
-			print 'HyperInclude is checked.'
+			print('HyperInclude is checked.')
 			options += ' -h'
 
 		if self.chkSuper.get_active():
-			print 'SuperInclude is checked.'
+			print('SuperInclude is checked.')
 			options += ' -H'
 
 		if self.chkWebcpp.get_active():
-			print 'Made with Webcpp is checked.'
+			print('Made with Webcpp is checked.')
 			options += ' -m'
 
 		if self.chkExternal.get_active():
-			print 'External StyleSheet is checked.'
+			print('External StyleSheet is checked.')
 			options += ' -X'
 
 		if self.ScsFile != "":
@@ -700,7 +700,7 @@ class webcppwnd(libglade.GladeWrapper):
 		file = model.get_value(iter, 0)
 		view = 'gedit ' + file + " &"
 		os.system(view)
-		print file
+		print(file)
 		return
 
 
@@ -712,7 +712,7 @@ class webcppwnd(libglade.GladeWrapper):
 		file = model.get_value(iter, 0)
 		view = 'mozilla ' + file + ".html &"
 		os.system(view)
-		print file
+		print(file)
 		return
 
 
@@ -737,7 +737,7 @@ class webcppwnd(libglade.GladeWrapper):
 		try:
 			file = open("COPYING", "r")
 		except IOError:
-			print 'Cannot open license file for reading'
+			print('Cannot open license file for reading')
 			license = "GNU General Public License (GPL)"
 
 		license = file.read()

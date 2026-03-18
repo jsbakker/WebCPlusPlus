@@ -12,13 +12,11 @@ LangBatch::LangBatch() {
 	fill();
 	init_switches();
 
-//	doStrings   = No;
-//	doNumbers   = No;
 	doCaseKeys  = No;
-//	doLabels    = Yes;
+
 	doHashes    = Yes;
-  doRemComnt  = Yes;
-  doBatComnt  = Yes;
+    doRemComnt  = Yes;
+    doBatComnt  = Yes;
 }
 
 void LangBatch::fill() {
