@@ -4,6 +4,9 @@
 
 #include "langeuphoria.h"
 
+#include <algorithm>
+#include <iterator>
+
 LangEuphoria ::LangEuphoria() {
 
 	fill();
@@ -16,10 +19,17 @@ LangEuphoria ::LangEuphoria() {
 void LangEuphoria ::fill() {
 
 	string K[] = {
-  "by","constant","do","else","elsif","end","exit","for","function","global",
-  "if","include","not","or","procedure","return","then","to","type","while",
-  "with","without","xor","and"
+	"and","break","by","case","constant","continue","do","else","elsif",
+	"elsifdef","elsedef","end","endif","enum","exit","export","fall_through",
+	"fallthru","for","function","global","goto","if","ifdef","include",
+	"label","namespace","not","or","override","procedure","public","return",
+	"switch","then","to","type","while","with","without","xor"
 	};
+	std::copy(std::cbegin(K), std::cend(K), std::back_inserter(keys));
 
-	for(int k=0;k < 24;k++) {keys.push_back(K[k]);}
+	// Euphoria built-in types
+	string T[] = {
+	"atom","integer","object","sequence"
+	};
+	std::copy(std::cbegin(T), std::cend(T), std::back_inserter(types));
 }

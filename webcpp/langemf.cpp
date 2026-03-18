@@ -4,6 +4,9 @@
 
 #include "langemf.h"
 
+#include <algorithm>
+#include <iterator>
+
 LangEmf ::LangEmf() {
 
 	fill();
@@ -21,11 +24,10 @@ LangEmf ::LangEmf() {
 void LangEmf ::fill() {
 
 	string K[] = {
-"!done",
-"!nmacro",
 "!abort",
 "!bell",
 "!continue",
+"!done",
 "!ehelp",
 "!elif",
 "!else",
@@ -35,14 +37,18 @@ void LangEmf ::fill() {
 "!force",
 "!goto",
 "!if",
+"!iif",
 "!jump",
+"!nmacro",
 "!repeat",
 "!return",
 "!tgoto",
 "!tjump",
 "!until",
 "!while",
-"define-macro"
+"0define-macro",
+"define-macro",
+"undefine-macro"
 	};
-	for(int k=0;k < 22;k++) {keys.push_back(K[k]);}
+    std::copy(std::cbegin(K), std::cend(K), std::back_inserter(keys));
 }

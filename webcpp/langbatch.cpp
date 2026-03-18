@@ -4,6 +4,9 @@
 
 #include "langbatch.h"
 
+#include <algorithm>
+#include <iterator>
+
 LangBatch::LangBatch() {
 
 	fill();
@@ -19,15 +22,28 @@ LangBatch::LangBatch() {
 }
 
 void LangBatch::fill() {
+	// Internal commands and batch-specific keywords
 	string K[] = {
-"assoc","at","attrib","break","cacls","call","cd","chcp","chdir","chkdsk",
-"chkntfs","cls","cmd","color","comp","compact","control","convert","copy",
-"date","del","dir","diskcomp","diskcopy","doskey","echo","endlocal",
-"erase","exit","fc","find","findstr","for","format","ftype","goto",
-"graftabl","help","if","label","md","mkdir","more","move","net","path",
-"pause","popd","print","prompt","pushd","rd","recover","ren","rename",
-"replace","rmdir","rundll32","set","setlocal","share","shift","sort",
-"start","subst","time","title","tree","type","ver","verify","vol","xcopy"
+"assoc","break","call","cd","chdir","cls","copy","date","defined","del",
+"dir","do","echo","else","endlocal","equ","erase","errorlevel","exist",
+"exit","fc","for","ftype","geq","goto","gtr","if","in","label","leq",
+"lss","md","mkdir","more","move","neq","not","path","pause","popd",
+"prompt","pushd","rd","ren","rename","replace","rmdir","set","setlocal",
+"shift","sort","start","time","title","tree","type","ver","verify","vol"
 	};
-	for(int k=0;k < 73;k++) {keys.push_back(K[k]);}
+	std::copy(std::cbegin(K), std::cend(K), std::back_inserter(keys));
+
+	// External commands commonly used in batch files
+	string T[] = {
+"at","attrib","bcdedit","bitsadmin","cacls","chcp","chkdsk","chkntfs",
+"cipher","clip","cmd","cmdkey","color","comp","compact","control",
+"convert","dism","diskcomp","diskcopy","doskey","driverquery","eventcreate",
+"expand","find","findstr","format","forfiles","graftabl","help","icacls",
+"ipconfig","mklink","msiexec","net","netsh","netstat","nslookup","openfiles",
+"pathping","ping","powershell","print","pwsh","recover","reg","regsvr32",
+"robocopy","runas","rundll32","sc","schtasks","share","shutdown","subst",
+"systeminfo","takeown","taskkill","tasklist","timeout","tracert","where",
+"whoami","wmic","wsl","xcopy"
+	};
+	std::copy(std::cbegin(T), std::cend(T), std::back_inserter(types));
 }
