@@ -71,6 +71,8 @@ class Engine {
 	void colourString(int   index, bool &inside, string cssclass);
 
 	void parseBigComment(string start, string end, bool &inside);
+	void parseMultiStr(string start, string end, bool &inside, string css);
+	void parseHeredoc(string marker = "&lt;&lt;");
 
 	void parseKeys();
 	void colourKeys(int index, string key, string cssclass);
@@ -155,6 +157,11 @@ class Engine {
 	bool doTclComnt;
 	bool doAspComnt;
 	bool doBatComnt;
+	bool doTplString;
+	bool doRawString;
+	bool doHeredoc;
+	bool doPercentQ;
+	bool doPhpHeredoc;
 
  //theme file I/O engine
  public:
@@ -177,7 +184,9 @@ class Engine {
 	bool inBckQuotes;
 	bool inHtmTags;
 	bool inComment;
-	bool endComment;
+	bool inMultiStr;
+	string heredocEnd;
+	bool endMultiLine;
 };
 
 #endif  // _ENGINE_H

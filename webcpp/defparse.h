@@ -24,11 +24,26 @@
 
 // linline parsing
 #define PARSE_INLINE_ASM     colourChildLang("asm", "}")
-#define PARSE_INLINE_JS      colourChildLang("text/javascript", "/script")
+#define PARSE_INLINE_JS      colourChildLang("&lt;script", "/script")
+#define PARSE_INLINE_CSS     colourChildLang("&lt;style", "/style")
 // string parsing
 #define PARSE_DBL_QUO_STRING parseString(DBL_QUOTES,inDblQuotes)
 #define PARSE_SIN_QUO_STRING parseString(SIN_QUOTES,inSinQuotes)
 #define PARSE_BCK_QUO_STRING parseString(BCK_QUOTES,inBckQuotes)
+// multiline string parsing
+
+#define PARSE_TPL_DBL_STRING parseMultiStr("\"\"\"", "\"\"\"", inMultiStr, "dblquot")
+
+#define PARSE_RAW_CPP_STRING parseMultiStr("R\"(", ")\"", inMultiStr, "dblquot")
+
+#define PARSE_PERCENT_QU_STR parseMultiStr("%Q{", "}", inMultiStr, "dblquot")
+
+#define PARSE_PERCENT_QL_STR parseMultiStr("%q{", "}", inMultiStr, "sinquot")
+
+#define PARSE_HEREDOC_STRING parseHeredoc("&lt;&lt;")
+
+#define PARSE_PHP_HEREDOC    parseHeredoc("&lt;&lt;&lt;")
+
 // multiline comment parsing
 #define PARSE_A_MARKUP_COMNT parseBigComment("&lt;!-", "--&gt;", inComment)
 #define PARSE_PAS_MOD2_COMNT parseBigComment("(*", "*)", inComment)
