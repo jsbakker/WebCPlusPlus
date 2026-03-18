@@ -128,7 +128,7 @@ Options:\n\
 
 
 	string Langs = "\
-Ada95\t\t*.adb,*.ads,*.ali\n\
+Ada\t\t*.adb,*.ads,*.ali\n\
 Assembly\t*.asm,*.s\n\
 Asp\t\t*.asp,*.asa\n\
 Basic\t\t*.bas\n\
@@ -136,39 +136,52 @@ C#\t\t*.cs\n\
 C Source\t*.c,*.rc\n\
 C++ Source\t*.cc,*.cpp,*.cxx\n\
 C/C++ Header\t*.h,*.hh,*.hpp,*.hxx\n\
-Objective-C\t*.m\n\
+CSS\t\t*.css\n\
 DOS Batch\t*.bat,*.cmd\n\
 EMF\t\t*.emf\n\
 Euphoria\t*.e,*.eu,*.ex\n\
+F#\t\t*.fs,*.fsi,*.fsx\n\
 Fortran\t\t*.f,*.f77,*.f90,*.for,*.ftn\n\
+Gherkin\t\t*.feature\n\
+GLSL\t\t*.glsl,*.vert,*.frag,*.geom,*.tesc,*.tese,*.comp\n\
+Go\t\t*.go\n\
 Haskell\t\t*.hs,*.lhs\n\
+HLSL\t\t*.hlsl,*.hlsli\n\
 Java\t\t*.java\n\
 JavaScript\t*.js\n\
-Markup\t\t*.htm,*.html,*.shtml,*.sgml,*.xml\n\
+Kotlin\t\t*.kt,*.kts\n\
+Markup\t\t*.htm,*.html,*.shtml,*.sgml\n\
 Modula2\t\t*.def,*.mod\n\
 Nasa CLIPS\t*.clp\n\
 NVidia Cg\t*.cg\n\
+Objective-C\t*.m\n\
+Objective-C++\t*.mm\n\
+OCaml\t\t*.ml,*.mli\n\
 Pascal\t\t*.pas\n\
 Perl\t\t*.cgi,*.pl,*.plx,*.plex,*.pm\n\
 PHP\t\t*.inc,*.php,*.php3,*.php4\n\
 Power Builder\t*.pbl,*.pbr\n\
 Python\t\t*.py,*.pyw\n\
+R\t\t*.r\n\
 RenderMan\t*.rib,*.sl\n\
 Ruby\t\t*.rb\n\
+Rust\t\t*.rs\n\
+Scala\t\t*.scala,*.sc\n\
 SQL\t\t*.sql\n\
+Swift\t\t*.swift\n\
 Tcl\t\t*.tcl,*.tk\n\
+TypeScript\t*.ts,*.tsx\n\
 Unix shell\t*.sh\n\
 UnrealScript\t*.uc\n\
+Vala\t\t*.vala,*.vapi\n\
 VHDL\t\t*.v,*.vhd,*.vhdl\n\
-Don't see your favorite language listed here?\n\
-Try http://webcpp.sourceforge.net/languages.php\n";
+XML\t\t*.xml\n\
+Zig\t\t*.zig\n";
 
-	cerr	<< "Web C Plus Plus v0.8.4  "
-		<< "Copyright (C)2001-2004 Jeffrey Bakker\n"
-		<< "Released January 3rd 2004, "
+	cerr	<< "Web C Plus Plus v0.9.0  "
+		<< "Copyright (C)2001-2026 Jeffrey Bakker\n"
 		<< "Compiled " << __DATE__ << " at " << __TIME__ << "\n\n"
 		<< ((mode == HELP_LANGUAGES)?Langs:Usage);
-
 }
 // determines the filetype for syntax highlighting ----------------------------
 char Driver::getExt(string filename)
@@ -211,6 +224,7 @@ char Driver::getExt(string filename)
 	else if(extension ==  "clp") {ext = CLP_FILE;}
 	else if(extension ==   "cs") {ext = CSP_FILE;}
 	else if(extension ==    "m") {ext = OBC_FILE;}
+    else if(extension ==   "mm") {ext = OCP_FILE;}
 	else if(extension ==  "emf") {ext = EMF_FILE;}
 	else if(extension ==    "e") {ext = EU4_FILE;}
 	else if(extension ==   "eu") {ext = EU4_FILE;}
@@ -225,7 +239,7 @@ char Driver::getExt(string filename)
 	else if(extension == "shtm") {ext = HTM_FILE;}
 	else if(extension == "html") {ext = HTM_FILE;}
 	else if(extension ==  "htm") {ext = HTM_FILE;}
-	else if(extension ==  "xml") {ext = HTM_FILE;}
+	else if(extension ==  "xml") {ext = XML_FILE;}
 	else if(extension == "sgml") {ext = HTM_FILE;}
 	else if(extension == "java") {ext = JAV_FILE;}
 	else if(extension ==   "js") {ext = JSC_FILE;}
@@ -250,12 +264,41 @@ char Driver::getExt(string filename)
 	else if(extension ==   "rb") {ext = RUB_FILE;}
 	else if(extension ==  "sql") {ext = SQL_FILE;}
 	else if(extension ==   "sh") {ext = UNX_FILE;}
+	else if(extension == "swift") {ext = SWF_FILE;}
 	else if(extension ==  "tcl") {ext = TCL_FILE;}
 	else if(extension ==   "tk") {ext = TCL_FILE;}
 	else if(extension ==   "uc") {ext = UNR_FILE;}
 	else if(extension ==    "v") {ext = VHD_FILE;}
 	else if(extension == "vhdl") {ext = VHD_FILE;}
 	else if(extension ==  "vhd") {ext = VHD_FILE;}
+	else if(extension ==  "css") {ext = CSS_FILE;}
+	else if(extension ==   "rs") {ext = RST_FILE;}
+	else if(extension ==   "go") {ext = GOL_FILE;}
+	else if(extension ==   "ts") {ext = TSC_FILE;}
+	else if(extension ==  "tsx") {ext = TSC_FILE;}
+	else if(extension ==   "kt") {ext = KOT_FILE;}
+	else if(extension ==  "kts") {ext = KOT_FILE;}
+	else if(extension == "vala") {ext = VLA_FILE;}
+	else if(extension == "vapi") {ext = VLA_FILE;}
+	else if(extension ==  "zig") {ext = ZIG_FILE;}
+	else if(extension == "glsl") {ext = GLS_FILE;}
+	else if(extension == "vert") {ext = GLS_FILE;}
+	else if(extension == "frag") {ext = GLS_FILE;}
+	else if(extension == "geom") {ext = GLS_FILE;}
+	else if(extension == "tesc") {ext = GLS_FILE;}
+	else if(extension == "tese") {ext = GLS_FILE;}
+	else if(extension == "comp") {ext = GLS_FILE;}
+	else if(extension == "hlsl") {ext = HLS_FILE;}
+	else if(extension == "hlsli") {ext = HLS_FILE;}
+	else if(extension ==    "r") {ext = R_FILE;}
+	else if(extension == "feature") {ext = GHK_FILE;}
+	else if(extension ==   "fs") {ext = FSH_FILE;}
+	else if(extension ==  "fsi") {ext = FSH_FILE;}
+	else if(extension ==  "fsx") {ext = FSH_FILE;}
+	else if(extension == "scala") {ext = SCA_FILE;}
+	else if(extension ==   "sc") {ext = SCA_FILE;}
+	else if(extension ==   "ml") {ext = OML_FILE;}
+	else if(extension ==  "mli") {ext = OML_FILE;}
 
 	else ext = TXT_FILE;
 	return ext;
@@ -268,7 +311,7 @@ string Driver::checkExt(string filename) {
 	char filetype = getExt(filename);
 
 	switch(filetype) {
-		case (ADA_FILE) : LANG(LangAda95,"Ada file");
+		case (ADA_FILE) : LANG(LangAda,"Ada file");
 		case (ASM_FILE) : LANG(LangAssembler,"Assembly file");
 		case (ASP_FILE) : LANG(LangAsp,"ASP file");
 		case (BAS_FILE) : LANG(LangBasic,"Basic file");
@@ -277,8 +320,10 @@ string Driver::checkExt(string filename) {
 		case (CPP_FILE) : LANG(LangCPlusPlus,"C++ file");
 		case (C4G_FILE) : LANG(LangCg,"NVIDIA Cg file");
 		case (CLP_FILE) : LANG(LangClips,"NASA CLIPS file");
+		case (CSS_FILE) : LANG(LangCSS,"CSS file");
 		case (CSP_FILE) : LANG(LangCSharp,"C-Sharp file");
 		case (OBC_FILE) : LANG(LangObjectiveC,"Objective-C file");
+        case (OCP_FILE) : LANG(LangObjectiveCpp,"Objective-C++ file");
 		case (EMF_FILE) : LANG(LangEmf,"MicroEmacs macro file");
 		case (EU4_FILE) : LANG(LangEuphoria,"Euphoria file");
 		case (FTN_FILE) : LANG(LangFortran,"Fortran file");
@@ -295,10 +340,25 @@ string Driver::checkExt(string filename) {
 		case (RUB_FILE) : LANG(LangRuby,"Ruby script");
 		case (RND_FILE) : LANG(LangRenderMan,"RenderMan file");
 		case (SQL_FILE) : LANG(LangSQL,"SQL script");
+		case (SWF_FILE) : LANG(LangSwift,"Swift file");
 		case (UNX_FILE) : LANG(LangShell,"UNIX shell script");
 		case (TCL_FILE) : LANG(LangTcl,"Tcl script");
 		case (UNR_FILE) : LANG(LangUScript,"UnrealScript");
 		case (VHD_FILE) : LANG(LangVHDL,"VHDL file");
+		case (XML_FILE) : LANG(LangXML,"XML file");
+		case (RST_FILE) : LANG(LangRust,"Rust file");
+		case (GOL_FILE) : LANG(LangGo,"Go file");
+		case (TSC_FILE) : LANG(LangTypeScript,"TypeScript file");
+		case (KOT_FILE) : LANG(LangKotlin,"Kotlin file");
+		case (VLA_FILE) : LANG(LangVala,"Vala file");
+		case (ZIG_FILE) : LANG(LangZig,"Zig file");
+		case (GLS_FILE) : LANG(LangGLSL,"GLSL file");
+		case (HLS_FILE) : LANG(LangHLSL,"HLSL file");
+		case (R_FILE)   : LANG(LangR,"R file");
+		case (GHK_FILE) : LANG(LangGherkin,"Gherkin feature file");
+		case (FSH_FILE) : LANG(LangFSharp,"F# file");
+		case (SCA_FILE) : LANG(LangScala,"Scala file");
+		case (OML_FILE) : LANG(LangOCaml,"OCaml file");
 		default         : LANG(LangText,"Text file");
 	}
 }

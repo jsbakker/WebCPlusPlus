@@ -51,7 +51,24 @@
 #define TCL_FILE 0x72
 #define TXT_FILE 0x74
 #define UNR_FILE 0x54
+#define SWF_FILE 0x53
 #define VHD_FILE 0x76
+#define CSS_FILE 0x43
+#define XML_FILE 0x58
+#define RST_FILE 0x30
+#define GOL_FILE 0x31
+#define TSC_FILE 0x32
+#define KOT_FILE 0x33
+#define VLA_FILE 0x34
+#define ZIG_FILE 0x35
+#define GLS_FILE 0x36
+#define HLS_FILE 0x37
+#define OCP_FILE 0x38
+#define R_FILE   0x39
+#define GHK_FILE 0x3A
+#define FSH_FILE 0x3B
+#define SCA_FILE 0x3C
+#define OML_FILE 0x3D
 
 #include "langada.h"
 #include "langasm.h"
@@ -63,6 +80,7 @@
 #include "langclips.h"
 #include "langcpp.h"
 #include "langcsharp.h"
+#include "langcss.h"
 #include "langemf.h"
 #include "langeuphoria.h"
 #include "langfortran.h"
@@ -81,9 +99,25 @@
 #include "langruby.h"
 #include "langshell.h"
 #include "langsql.h"
+#include "langswift.h"
 #include "langtcl.h"
 #include "langtext.h"
 #include "languscript.h"
 #include "langvhdl.h"
+#include "langxml.h"
+#include "langrust.h"
+#include "langgo.h"
+#include "langts.h"
+#include "langkotlin.h"
+#include "langvala.h"
+#include "langzig.h"
+#include "langglsl.h"
+#include "langhlsl.h"
+#include "langobjcpp.h"
+#include "langr.h"
+#include "langgherkin.h"
+#include "langfsharp.h"
+#include "langscala.h"
+#include "langocaml.h"
 
 #endif //_DEF_LANGS_H
