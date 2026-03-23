@@ -14,12 +14,17 @@ LangCSharp ::LangCSharp() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
     doSymbols = Yes;
     doLabels = Yes;
     doPreProc = Yes;
     doBigComnt = Yes;
     doCinComnt = Yes;
     doTplString = Yes;
+    // C# interpolated strings: $"text {expr}" — applied to all "..." strings
+    doInterpolate = true;
+    interpolStart = "{";
+    interpolEnd = '}';
 }
 
 void LangCSharp ::fill() {

@@ -14,9 +14,14 @@ LangPython::LangPython() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
     doSymbols = Yes;
     doUnxComnt = Yes;
     doTplString = Yes;
+    // Python f-strings: f"text {expr}" — applied to all "..." strings
+    doInterpolate = true;
+    interpolStart = "{";
+    interpolEnd = '}';
 }
 
 void LangPython::fill() {

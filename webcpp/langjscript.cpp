@@ -14,9 +14,16 @@ LangJScript ::LangJScript() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
+    doStringsBackTick = true;
     doSymbols = Yes;
     doCinComnt = Yes;
     doBigComnt = Yes;
+    // JavaScript template literal interpolation: `text ${expr}`
+    doInterpolate = true;
+    interpolStart = "${";
+    interpolEnd = '}';
+    interpolCssClass = "preproc"; // backtick strings use preproc class
 }
 
 void LangJScript ::fill() {

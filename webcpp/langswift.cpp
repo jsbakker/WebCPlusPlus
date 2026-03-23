@@ -11,10 +11,15 @@ LangSwift::LangSwift() {
     fill();
     init_switches();
 
+    doStringsBackTick = true;
     doSymbols = Yes;
     doBigComnt = Yes;
     doCinComnt = Yes;
     doTplString = Yes;
+    // Swift string interpolation: "text \(expr)"
+    doInterpolate = true;
+    interpolStart = "\\(";
+    interpolEnd = ')';
 }
 
 void LangSwift::fill() {

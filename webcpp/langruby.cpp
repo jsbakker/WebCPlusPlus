@@ -14,6 +14,8 @@ LangRuby ::LangRuby() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
+    doStringsBackTick = true;
     doSymbols = Yes;
     doScalars = Yes;
     doArrays = Yes;
@@ -21,6 +23,9 @@ LangRuby ::LangRuby() {
     doUnxComnt = Yes;
     doHeredoc = Yes;
     doPercentQ = Yes;
+    doInterpolate = true;
+    interpolStart = "#{";
+    interpolEnd = '}';
 }
 
 void LangRuby ::fill() {

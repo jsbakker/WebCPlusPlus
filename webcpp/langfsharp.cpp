@@ -11,10 +11,16 @@ LangFSharp::LangFSharp() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
+    doStringsBackTick = true;
     doSymbols = Yes;
     doCinComnt = Yes;  // // line comments
     doPasComnt = Yes;  // (* *) block comments
     doTplString = Yes; // """...""" triple-quoted strings
+    // F# interpolated strings (F# 6+): $"text {expr}"
+    doInterpolate = true;
+    interpolStart = "{";
+    interpolEnd = '}';
 }
 
 void LangFSharp::fill() {

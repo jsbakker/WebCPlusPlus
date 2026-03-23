@@ -12,10 +12,16 @@ LangScala::LangScala() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
+    doStringsBackTick = true;
     doSymbols = Yes;
     doBigComnt = Yes;  // /* */
     doCinComnt = Yes;  // //
     doTplString = Yes; // """..."""
+    // Scala string interpolation: s"text ${expr}" or s"text $name"
+    doInterpolate = true;
+    interpolStart = "${";
+    interpolEnd = '}';
 }
 
 void LangScala::fill() {

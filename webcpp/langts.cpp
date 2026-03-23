@@ -11,11 +11,16 @@ LangTypeScript::LangTypeScript() {
     fill();
     init_switches();
 
+    doStringsSinQuote = true;
+    doStringsBackTick = true;
     doSymbols = Yes;
     doBigComnt = Yes; // /* */
     doCinComnt = Yes; // //
-    // doStrings = true by default; backtick template literals handled
-    // automatically
+    // TypeScript template literal interpolation: `text ${expr}`
+    doInterpolate = true;
+    interpolStart = "${";
+    interpolEnd = '}';
+    interpolCssClass = "preproc"; // backtick strings use preproc class
 }
 
 void LangTypeScript::fill() {
