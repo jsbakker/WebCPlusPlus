@@ -33,7 +33,7 @@ class Engine {
 	bool abortParse();
 	bool abortColour(int index);
 
-	bool isInsideIt(int index, string start, string end);
+	bool isInsideIt(int index, string start, string end, bool skipTagged = false);
 	bool isInsideTag(int index);
 	bool isNotWord(int index);
 	void eraseTags(int start, int fin);
@@ -61,7 +61,7 @@ class Engine {
 	void parseHeredoc(string marker = "&lt;&lt;");
 
 	void parseKeys();
-	void colourKeys(int index, string key, string cssclass);
+	bool colourKeys(int index, string key, string cssclass);
 	bool isKey(int start, int end) const;
 	int  noCaseFind(string search, int index);
 	

@@ -19,6 +19,9 @@ Child->setLangExt( y )
 #include <cctype>
 using namespace std;
 
+// forward declaration (defined near colourKeys)
+static bool isInsideFontTag(const string &buffer, int index);
+
 
 // initialize data members ----------------------------------------------------
 void Engine::init_switches() {
@@ -211,8 +214,8 @@ bool Engine::abortColour(int index) {
 	if(doHtmComnt
 	&& ( isInsideIt(index,"&lt;","&gt;")
 	&&   isInsideIt(index,"&gt;","&lt;") ))	{return true;}
-	if(isInsideIt(index,"/*","*/"))		{return true;}
-	if(isInsideIt(index,"(*","*)"))		{return true;}
+	if(isInsideIt(index,"/*","*/",true))	{return true;}
+	if(isInsideIt(index,"(*","*)",true))	{return true;}
 	if(isInsideIt(index,"&lt;!","&gt;"))	{return true;}
 	if(isInsideIt(index,"\"","\""))		{return true;}
 	if(!doAspComnt) {
@@ -223,11 +226,11 @@ bool Engine::abortColour(int index) {
 	return false;
 }
 // check if the index is inside the specified boundaries ----------------------
-bool Engine::isInsideIt(int index, string start, string end) {
+bool Engine::isInsideIt(int index, string start, string end, bool skipTagged) {
 
 	// count the number of starts and ends
 	// and return true for an odd number
-	
+
 	if(buffer.find(start,0) == string::npos) {return false;}
 
 	int l = 0;
@@ -236,14 +239,18 @@ bool Engine::isInsideIt(int index, string start, string end) {
 
 	idx = buffer.find(end,index);
 	while(idx != (int)string::npos && idx < (int)buffer.size()) {
-		if(idx > 0 && buffer[idx-1] != '\\'){r++;}
+		if(idx > 0 && buffer[idx-1] != '\\'){
+			if(!skipTagged || !isInsideFontTag(buffer, idx)) r++;
+		}
 		else if(idx == 0){r++;}
 		idx = buffer.find(end,idx+1);
 	}
 
 	idx = buffer.rfind(start,index);
 	while(idx >= 0 && idx < (int)buffer.size()) {
-		if(idx > 0 && buffer[idx-1] != '\\'){l++;}
+		if(idx > 0 && buffer[idx-1] != '\\'){
+			if(!skipTagged || !isInsideFontTag(buffer, idx)) l++;
+		}
 		else if(idx == 0){l++;}
 		if(idx == 0) break;
 		idx = buffer.rfind(start,idx-1);
@@ -333,6 +340,16 @@ void Engine::parseSymbol() {
 
 			end = i;
 			while(isSymbol(buffer[end+1])) {end++;}
+
+			// skip symbol spans that form comment markers
+			if(buffer[i] == '-') {
+				string span = buffer.substr(i, end - i + 1);
+				if(doAdaComnt && span.find("--") != string::npos) {i = end; continue;}
+				if(doHskComnt) {
+					if(i > 0 && buffer[i-1] == '{') {i = end; continue;}
+					if(end+1 < (int)buffer.size() && buffer[end+1] == '}') {i = end; continue;}
+				}
+			}
 
 			if(colourSymbol(i,end)) {
 
@@ -577,14 +594,14 @@ void Engine::parseMultiStr(string start, string end, bool &inside, string css) {
 
 	if(inside) {search = end;}
 	else {search = start;}
-	
+
 	index = buffer.find(search,index);
 	if(index == -1) {return;}
 
 	while (index < string::npos) {
 
 		if(inside) {search = end;}
-		else {search = start;}		
+		else {search = start;}
 
 		index = buffer.find(search,index);
 		if(index == -1) {return;}
@@ -595,6 +612,34 @@ void Engine::parseMultiStr(string start, string end, bool &inside, string css) {
 			}
 		}
 		if(index == -1) {return;}
+
+		// For brace-delimited strings (%Q{}, %q{}, etc.), skip nested
+		// braces so that interpolation like #{var} doesn't end the
+		// string prematurely.
+		if(inside && end == "}") {
+			int depth = 0;
+			// Find where the string content begins. If the opening
+			// delimiter (%Q{ or %q{) is on this line, start scanning
+			// after its {. Otherwise (continuation line), start at 0.
+			int scanStart = 0;
+			string startNoBrace = start.substr(0, start.size() - 1); // "%Q" or "%q"
+			int delimPos = buffer.rfind(startNoBrace, index);
+			if(delimPos != (int)string::npos) {
+				// Skip past the opening { of the delimiter
+				scanStart = delimPos + start.size();
+			}
+			for(int i = scanStart; i < index; i++) {
+				if(buffer[i] == '{' && !isInsideTag(i)) depth++;
+				if(buffer[i] == '}' && !isInsideTag(i)) depth--;
+			}
+			// If depth > 0, there are unclosed braces before this },
+			// so this } is a nested one — skip it.
+			if(depth > 0) {
+				index = buffer.find(search, index + 1);
+				continue;
+			}
+		}
+
 		if(inside) {
 			index += end.size()-1;
 		}
@@ -723,6 +768,8 @@ void Engine::parseHeredoc(string marker) {
 // parse for multi-line comments ----------------------------------------------
 void Engine::parseBigComment(string start, string end, bool &inside) {
 
+	if(inMultiStr) {return;}
+
 	string search, escap, css;
 	int index,offset;
 	bool erase;
@@ -803,10 +850,12 @@ void Engine::parseKeys() {
 
 		while(index < buffer.size() && index != -1) {
 
+			bool inserted = false;
 			if(isKey(index-1, (index) + keys[i].size())) {
-				colourKeys(index, keys[i], "keyword");
+				inserted = colourKeys(index, keys[i], "keyword");
 			}
-			index = noCaseFind(cmpkey,(index+cmpkey.size()+offset));
+			int skip = inserted ? offset : 0;
+			index = noCaseFind(cmpkey,(index+cmpkey.size()+skip));
 		}
 	}
 
@@ -817,10 +866,12 @@ void Engine::parseKeys() {
 
 		while(index < buffer.size() && index != -1) {
 
+			bool inserted = false;
 			if(isKey(index-1, (index) + types[i].size())) {
-				colourKeys(index, types[i], "keytype");
+				inserted = colourKeys(index, types[i], "keytype");
 			}
-			index = noCaseFind(cmpkey,(index+cmpkey.size()+offset));
+			int skip = inserted ? offset : 0;
+			index = noCaseFind(cmpkey,(index+cmpkey.size()+skip));
 		}
 	}
 }
@@ -906,19 +957,20 @@ static bool isInsideFontTag(const string &buffer, int index) {
 	return false;
 }
 // colourize the keywords -----------------------------------------------------
-void Engine::colourKeys(int index, string key, string cssclass) {
+bool Engine::colourKeys(int index, string key, string cssclass) {
 
 	if(isInsideTag(index)) {
-		return;
+		return false;
 	}
 	if(isInsideFontTag(buffer, index)) {
-		return;
+		return false;
 	}
 	if(abortColour(index)) {
-		return;
+		return false;
 	}
 	buffer.insert(index, "<font CLASS=" + cssclass + ">");
 	buffer.insert(index+key.size()+20, "</font>");
+	return true;
 }
 //-----------------------------------------------------------------------------
 // parse for variables --------------------------------------------------------
@@ -926,6 +978,7 @@ void Engine::parseVariable(string var) {
 
 	if(endMultiLine) {return;}
 	if(inMultiStr)   {return;}
+	if(inComment)    {return;}
 
 	int index;
 	int test;
@@ -967,6 +1020,11 @@ void Engine::colourVariable(int index) {
 		else i++;
 	}
 
+	// if the variable prefix is at the end of the buffer (no delimiter
+	// found because the search started at or past buffer.size()),
+	// close the tag at the end instead of at position 0
+	if(!end) {end = buffer.size();}
+
 	if(end > 0 && buffer[end -1] == '\"')     {end--;}
 	if(end > 0 && buffer[end -1] == ')')      {end--;}
 
@@ -990,7 +1048,27 @@ void Engine::parseComment(string cmnt) {
 				if(index == -1) {return;}
 			}
 		}
-	}	
+	}
+//-----------------------------------------------//
+
+// do not mistake HTML entity terminators for assembly comments
+// (pre_parse converts > to &gt; and & to &amp; — the trailing ;
+//  of these entities is not a real semicolon in the source)
+	if(cmnt == ";") {
+		while(index != -1 && index > 0) {
+			bool isEntity = false;
+			// check if ; is the end of &gt; &lt; or &amp;
+			if(index >= 3 && buffer.substr(index-3, 4) == "&gt;") isEntity = true;
+			if(index >= 3 && buffer.substr(index-3, 4) == "&lt;") isEntity = true;
+			if(index >= 4 && buffer.substr(index-4, 5) == "&amp;") isEntity = true;
+			if(isEntity) {
+				index = buffer.find(cmnt, index + 1);
+				continue;
+			}
+			break;
+		}
+		if(index == -1) {return;}
+	}
 //-----------------------------------------------//
 
 	if(index > 0 && buffer[index -1] == '$')  {return;}
@@ -1005,7 +1083,7 @@ void Engine::colourComment(int index) {
 		return;
 	}
 	if(doCinComnt) {
-		if(buffer.rfind("http:",index) == index -5)	{return;}
+		if(index >= 5 && buffer.rfind("http:",index) == index -5)	{return;}
 		if(buffer.rfind("!DOCTYPE", index) != -1)	{return;}
 	}
 
