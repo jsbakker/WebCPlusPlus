@@ -169,12 +169,12 @@ char Driver::getExt(string filename) {
     char ext;
 
     string extension = "";
-    dot = filename.rfind(".");
+    dot = static_cast<int>(filename.rfind("."));
 
     if (dot != -1) {
         extension = filename.substr(dot + 1, filename.size() - dot);
     }
-    for (int i = 0; i < extension.size(); i++) {
+    for (int i = 0; i < static_cast<int>(extension.size()); i++) {
         extension[i] = tolower(extension[i]);
     }
 
@@ -527,7 +527,7 @@ bool Driver::prep_files(string ifile, string ofile, char over) {
 // returns the filename without the full path ---------------------------------
 string Driver::getTitle() {
 
-    int slash = iFile.rfind(DIRECTORY_SLASH);
+    int slash = static_cast<int>(iFile.rfind(DIRECTORY_SLASH));
     if (slash == -1) {
         return iFile;
     }
@@ -558,24 +558,24 @@ void Driver::drive() {
     while (lang->IO->ifile && cin) {
         lang->doParsing();
 
-        if( ((lang->getLineCount()*100)/percent) < 101 ) {
-
-            cerr << '\r';
-
-            if(!lang->IO->isIredir()) {
-
-                cerr	<< ((lang->getLineCount() * 100) / percent)
-                    << "% Complete ";
-            }
-            cerr << "@ line " << lang->getLineCount()-1;
-        }
+//        if( ((lang->getLineCount()*100)/percent) < 101 ) {
+//
+//            cerr << '\r';
+//
+//            if(!lang->IO->isIredir()) {
+//
+//                cerr	<< ((lang->getLineCount() * 100) / percent)
+//                    << "% Complete ";
+//            }
+//            cerr << "@ line " << lang->getLineCount()-1;
+//        }
     }
     lang->endHtml();
 
     time_end = clock();
     time_dif = time_end - time_beg;
 
-    cerr << " took " << setprecision(3) << (double)time_dif / CYCLE_SPEED
+    cerr << "Parsing took " << setprecision(3) << (double)time_dif / CYCLE_SPEED
          << " seconds.\n";
 
     lang->IO->close();
