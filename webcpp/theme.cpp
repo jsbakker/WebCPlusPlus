@@ -5,6 +5,7 @@
 
 #include "theme.h"
 #include "defsys.h"
+#include "webcpp_paths.h"
 #include <cctype>
 
 namespace {
@@ -53,7 +54,7 @@ bool Theme::setFile(string filename) {
         // cerr << "...searching default directory.";
         // search in default webcpp data dir
         if (filename.rfind(DIRECTORY_SLASH) == string::npos) {
-            filename = WEBCPP_DATA_DIR + filename;
+            filename = WEBCPP_THEMES_DIR + filename;
 
             if (openR(filename)) {
                 return load();
@@ -155,6 +156,11 @@ bool Theme::load() {
         Colours2[Comment] = getColour("comment");
         // use a background image, if found
         Picture = getColour("background");
+        // if the theme specifies a bare filename, resolve it against the
+        // installed backgrounds directory
+        if (Picture != "\0" && Picture.rfind(DIRECTORY_SLASH) == string::npos) {
+            Picture = WEBCPP_BACKGROUNDS_DIR + Picture;
+        }
 
         // check the format of all the colours
         for (int i = BgColor; i <= Comment; i++) {

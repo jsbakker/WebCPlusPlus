@@ -7,11 +7,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(GNUInstallDirs)
 
+# Generate paths header from the install prefix so theme.cpp knows where
+# themes and backgrounds are installed at runtime.
+set(WEBCPP_THEMES_DIR      "${CMAKE_INSTALL_FULL_DATADIR}/webcpp/themes/")
+set(WEBCPP_BACKGROUNDS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/webcpp/backgrounds/")
+
+configure_file(
+    webcpp/webcpp_paths.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/webcpp_paths.h
+    @ONLY
+)
+
 file(GLOB WEBCPP_SOURCES "webcpp/*.cpp")
 
 add_executable(webcpp ${WEBCPP_SOURCES})
 
-target_include_directories(webcpp PRIVATE webcpp)
+target_include_directories(webcpp PRIVATE webcpp ${CMAKE_CURRENT_BINARY_DIR})
 
 target_compile_options(webcpp PRIVATE
     -O2
