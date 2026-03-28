@@ -6,6 +6,8 @@
 #ifndef _DEF_SYS_H
 #define _DEF_SYS_H
 
+// TODO: use std::filesystem
+
 #if defined(WIN32)
 #define COPY "copy /y"
 #define LIST_DIRECTORY "dir /s /b "
