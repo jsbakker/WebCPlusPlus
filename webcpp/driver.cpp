@@ -14,13 +14,14 @@
 
 #include <ctime>
 #include <iomanip>
+#include <vector>
 
 using std::cerr;
 using std::cin;
-using std::ifstream;
 using std::make_shared;
 using std::setprecision;
 using std::string;
+using std::vector;
 
 Driver::Driver() {
 
@@ -36,26 +37,26 @@ Driver::~Driver() {
 // toggle/set an option --------------------------------------------------------
 bool Driver::switch_parser(const string &arg) {
 
-    if (arg.substr(0, 3) == "-x=") {
+    if (arg.starts_with("-x=")) {
         cerr << checkExt("." + arg.substr(3)) << " type forced.\n";
         prep_files(iFile, oFile, 0x66);
-    } else if (arg.substr(0, 3) == "-c=") {
+    } else if (arg.starts_with("-c=")) {
         lang->Scs2.setFile(arg.substr(3));
-    } else if (arg.substr(0, 3) == "-C=") {
+    } else if (arg.starts_with("-C=")) {
         lang->options.toggleExtcss();
         lang->Scs2.setFile(arg.substr(3));
-    } else if (arg.substr(0, 3) == "-i=") {
+    } else if (arg.starts_with("-i=")) {
         lang->Scs2.setPicture(arg.substr(3));
-    } else if (arg.substr(0, 3) == "-t=") {
+    } else if (arg.starts_with("-t=")) {
         lang->options.toggleBigtab();
         lang->options.setTabWidth(arg.substr(3));
-    } else if (arg.substr(0, 3) == "-w=") {
+    } else if (arg.starts_with("-w=")) {
         lang->options.toggleNumber();
         lang->options.toggleAnchor();
         lang->options.toggleHypinc();
         lang->options.toggleWebcpp();
         lang->Scs2.setFile(arg.substr(3));
-    } else if (arg.substr(0, 3) == "-W=") {
+    } else if (arg.starts_with("-W=")) {
         lang->options.toggleNumber();
         lang->options.toggleAnchor();
         lang->options.toggleHypinc();
@@ -226,11 +227,11 @@ bool Driver::prep_files(const string &ifile, const string &ofile, char over) {
 // returns the filename without the full path ---------------------------------
 string Driver::getTitle() const {
 
-    int slash = static_cast<int>(iFile.rfind(DIRECTORY_SLASH));
-    if (slash == -1) {
+    auto slashPos = iFile.rfind(DIRECTORY_SLASH);
+    if (slashPos == string::npos) {
         return iFile;
     }
-    return iFile.substr(slash + 1);
+    return iFile.substr(slashPos + 1);
 }
 // run the webcpp engine ------------------------------------------------------
 void Driver::drive() {
@@ -238,36 +239,10 @@ void Driver::drive() {
     clock_t time_beg, time_end, time_dif;
     time_beg = clock();
 
-    // get the filesize
-    ifstream Count;
-    string tmp;
-    int percent = 0;
-
-    Count.open(iFile.data());
-    while (Count) {
-        getline(Count, tmp);
-        percent++;
-    }
-    percent--;
-    Count.close();
-    // to compare against progress
-
     HtmlWriter::writeDocumentStart(lang->IO, lang->Scs2, lang->options, getTitle());
     lang->doParsing();
     while (lang->IO->ifile && cin) {
         lang->doParsing();
-
-//        if( ((lang->getLineCount()*100)/percent) < 101 ) {
-//
-//            cerr << '\r';
-//
-//            if(!lang->IO->isIredir()) {
-//
-//                cerr	<< ((lang->getLineCount() * 100) / percent)
-//                    << "% Complete ";
-//            }
-//            cerr << "@ line " << lang->getLineCount()-1;
-//        }
     }
     HtmlWriter::writeDocumentEnd(lang->IO, lang->options);
 
@@ -309,17 +284,41 @@ void Driver::makeIndex(const string &prefix) {
 
     Index << "\n</body>\n</html>";
 }
+// highlight source code string in memory, returning HTML -----------------------
+string Driver::highlight_from_string(const string &source,
+                                     const string &filename,
+                                     const vector<string> &options) {
+    checkExt(filename);
+
+    // Snippet-only mode by default — no full HTML document wrapper
+    switch_parser("-s");
+
+    for (const auto &opt : options) {
+        switch_parser(opt);
+    }
+
+    auto io = make_shared<CFfile>();
+    io->openStringR(source);
+    io->openStringW();
+    lang->setupIO(io);
+
+    HtmlWriter::writeDocumentStart(lang->IO, lang->Scs2, lang->options, filename);
+
+    // Process all lines until the input stream is exhausted
+    lang->doParsing();
+    while (lang->IO->isInputGood()) {
+        lang->doParsing();
+    }
+
+    HtmlWriter::writeDocumentEnd(lang->IO, lang->options);
+
+    return io->getStringW();
+}
 //-----------------------------------------------------------------------------
 void Driver::clean() {
-
-    if (lang != nullptr) {
-        lang = nullptr;
-    }
+    lang = nullptr;
 }
 void Driver::endio() {
-
-    if (ObjIO != nullptr) {
-        ObjIO = nullptr;
-    }
+    ObjIO = nullptr;
 }
 //-----------------------------------------------------------------------------
