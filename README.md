@@ -60,3 +60,6 @@ syntax highlighting and colour themes.
 |VHDL		          |.v, .vhd, .vhdl|
 |XML		          |.xml|
 |Zig		          |.zig|
+
+# Installation
+This project uses the standard CMake build routine. Refer to [INSTALL.md](INSTALL.md) for detailed instructions.

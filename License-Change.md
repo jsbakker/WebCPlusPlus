@@ -1,6 +1,6 @@
 # TL;DR
-Webcpp 0.8.4 and older Copyright (C)2001 - 2004 Jeffrey Bakker under the GNU GPL
-Webcpp 0.9.0 and newer Copyright (C)2026 Jeffrey Bakker under the MIT License
+- Webcpp 0.8.4 and older Copyright (C)2001 - 2004 Jeffrey Bakker under the GNU GPL
+- Webcpp 0.9.0 and newer Copyright (C)2026 Jeffrey Bakker under the MIT License
 
 # License Update Notice
 As the sole author and copyright holder of webcpp, I, Jeffrey Bakker, am re-releasing the software under the MIT License starting with version 0.9.0.
