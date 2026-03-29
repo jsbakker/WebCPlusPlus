@@ -6,6 +6,7 @@ ver 0.9.0 (03/27/2026)
   - Add multi-line string support for C++, C#, Java, Swift, Perl, PHP, Python, Ruby, Shell.
   - Add support for F#, Gherkin, Go, Kotlin, Objective-C++, OCaml, R, Rust, Scala, Swift, TypeScript, Vala, Zig, GLSL, HLSL.
   - Refactor and update for modern C++ features, requiring C++ 23.
+  - Improve preprocessor directive highlighting.
   - Switch build system from autoconf/automake to CMake.
 
 
