@@ -65,8 +65,33 @@ unit tests, language support, and modern C++ to support other projects.
 |XML		          |.xml|
 |Zig		          |.zig|
 
+
+# Usage
+```
+Usage: $ webcpp <infile> <outfile> [options...]
+
+Options:
+  -c=<scheme>        Use a webcpp colour scheme.
+  -w=<scheme>        The works, same as -m -l -a -h -c=<scheme>.
+  -i=<filename>      Use an image for the background.
+  -t=<width>         Convert tabs to spaces using the specified width.
+  -x=<extension>     Force the filetype for syntax highlighting.
+  -X,--external-css  Generate an external stylesheet.
+  -s,--snippet-only  Don't generate HTML and BODY tags.
+  -l,--line-numbers  Print the line numbers in the left margin.
+  -a,--anchor-lines  Create anchors to line numbers.
+  -h,--hyperinclude  Create hyperlinks to #include statements.
+  -H,--superinclude  Hyperinclude that recursively genera.tes files.
+  -t,--tabs-spaces   Convert tabs to spaces, default width is 8.
+  -m,--made-with     Show made with webcpp footer.
+  -A,--auto          Automatic naming in place of the output file.
+  - ,--pipe          Use STDIN or STDOUT in place of the filename.
+```
+
+
 # Installation
 This project uses the standard CMake build routine. Refer to [INSTALL.md](INSTALL.md) for detailed instructions.
+
 
 # Testing
 The test suite uses Google Test and is built alongside the main binary via CMake.
