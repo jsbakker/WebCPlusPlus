@@ -133,9 +133,6 @@ bool Engine::abortParse() const {
     if (state.inComment) {
         return true;
     }
-    if (state.inMultiStr) {
-        return true;
-    }
 
     return false;
 }
@@ -155,7 +152,7 @@ bool Engine::abortColour(int index) const {
     // On multi-line string continuation lines where no font tag was inserted
     // (e.g. triple-quoted strings, comment continuations), block coloring
     // outside interpolation zones.
-    if (state.endMultiLine || state.inMultiStr)
+    if (state.endMultiLine)
         return true;
 
     if (rules->doBlockCommentMarkup && (isInsideIt(index, "&lt;", "&gt;") &&
@@ -1029,7 +1026,6 @@ void Engine::parseMultilineString(const string &start, const string &end, bool &
         {
             auto p = buffer.find(search, static_cast<size_t>(offset));
             if (p == string::npos || p > buffer.size()) {
-                if (inside) state.endMultiLine = true;
                 return;
             }
             index = static_cast<int>(p);
