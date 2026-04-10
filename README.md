@@ -63,3 +63,18 @@ syntax highlighting and colour themes.
 
 # Installation
 This project uses the standard CMake build routine. Refer to [INSTALL.md](INSTALL.md) for detailed instructions.
+
+# Testing
+The test suite uses Google Test and is built alongside the main binary via CMake.
+
+```bash
+# Configure and build tests
+cmake -S . -B build
+cmake --build build --target webcpp_tests
+
+# Run all tests
+ctest --test-dir build --output-on-failure
+
+# Run a single test suite
+ctest --test-dir build -R CPlusPlusHighlight --output-on-failure
+```
