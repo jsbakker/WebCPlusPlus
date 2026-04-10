@@ -8,6 +8,7 @@ ver 0.9.0 (03/27/2026)
   - Refactor and update for modern C++ features, requiring C++ 23.
   - Improve preprocessor directive highlighting.
   - Switch build system from autoconf/automake to CMake.
+  - Add 1,000+ unit tests using GoogleTest that can be run with ctest.
 
 
  ver 0.8.4 (04/01/2004)
