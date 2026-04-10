@@ -47,14 +47,15 @@ class CFdatapair {
     //---------------------------------------------------------------------------
     std::string getname() const;  // return the name
     std::string getvalue() const; // return the value
-    void setname(const std::string &n);  // change the name
-    void setvalue(const std::string &v); // change the value
     //---------------------------------------------------------------------------
-    std::string info_nv() const; // return the name/value in printable format
-    std::string info_ml() const; // return the name/value in markup format
-    //---------------------------------------------------------------------------
-    void translateML(const std::string &mldata); // change the name/value using markup data
-    void swap();                     // swap the name and value
+
+  private:
+    void setname(const std::string &n);
+    void setvalue(const std::string &v);
+    std::string info_nv() const;
+    std::string info_ml() const;
+    void translateML(const std::string &mldata);
+    void swap();
     //---------------------------------------------------------------------------
   protected:
     std::string name;

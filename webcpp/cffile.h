@@ -136,9 +136,6 @@ class CFfile {
     CFfile(const std::string &filename, char io);
     CFfile(const std::string &filein, const std::string &fileout);
     ~CFfile();
-    // Initialize bool data members
-    // ----------------------------------------------
-    void init_switches();
     //----------------------------------------------------------------------------
     // Operator overloading
     // ------------------------------------------------------
@@ -159,8 +156,6 @@ class CFfile {
     bool openW(const std::string &fn, bool ow);  // open, specify overwrite
     bool open(const std::string &fn, char io);   // open, specify mode
 
-    bool isIopen() const { return iopen; } // is infile open?
-    bool isOopen() const { return oopen; } // is outfile open?
     //----------------------------------------------------------------------------
     // In-memory (string-stream) I/O
     // ---------------------------------------------
@@ -168,13 +163,6 @@ class CFfile {
     void openStringW();                         // open an in-memory output stream
     std::string getStringW() const;             // retrieve accumulated output
     bool isInputGood() const;                   // true if current input stream has more data
-    //----------------------------------------------------------------------------
-    // File pointer location methods
-    // ---------------------------------------------
-    void setIFptr(long location); // set the infile pointer location
-    void setOFptr(long location); // set the outfile pointer location
-    long getIFptr();              // get the infile pointer location
-    long getOFptr();              // get the outfile pointer location
     // get the filenames
     // ---------------------------------------------------------
     inline std::string getStrIf() const { return str_if; }
@@ -200,8 +188,6 @@ class CFfile {
     // Special purpose read methods
     // ----------------------------------------------
     void rline(std::string &buffer);              // read a line to the string
-    void rfile(std::string &buffer);              // read a file to the string
-    void backup(const std::string &fname, const std::string &bname); // copy a file
     // File close methods
     // --------------------------------------------------------
     void closeR(); // close the input file
@@ -213,6 +199,17 @@ class CFfile {
     std::ifstream ifile; // input file stream
     std::ofstream ofile; // output file stream
     //----------------------------------------------------------------------------
+  private:
+    void init_switches();
+    bool isIopen() const { return iopen; }
+    bool isOopen() const { return oopen; }
+    void setIFptr(long location);
+    void setOFptr(long location);
+    long getIFptr();
+    long getOFptr();
+    void rfile(std::string &buffer);
+    void backup(const std::string &fname, const std::string &bname);
+
   protected:
     // I/O redirection switches
     // --------------------------------------------------
