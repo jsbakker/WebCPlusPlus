@@ -8,8 +8,9 @@
 Webcpp converts source code from various programming languages into HTML with
 syntax highlighting and colour themes.
 
-Note: This is legacy project from 2001-2004 that has been revised in 2026 for
-unit tests, language support, and modern C++ to support other projects.
+Note: This is legacy project originally hosted on SourceForge by the same author.
+It has been revised in 2026 for unit tests, language support, and modern C++ to
+support other projects.
 
 
 ## Supported Languages / Detected Filetypes
