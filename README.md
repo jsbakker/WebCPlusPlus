@@ -2,7 +2,7 @@
 ![linux](https://img.shields.io/badge/os-linux-green)
 ![macOS](https://img.shields.io/badge/os-macOS-green.svg?style=flat)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
-
+[![CMake and CTest](https://github.com/jsbakker/WebCPlusPlus/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/jsbakker/WebCPlusPlus/actions/workflows/cmake-single-platform.yml)
 
 # Web C Plus Plus (webcpp)
 Webcpp converts source code from various programming languages into HTML with
