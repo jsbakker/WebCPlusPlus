@@ -478,6 +478,29 @@ void Engine::parseSymbol() {
                 }
             }
 
+            // skip + that forms part of D block comment /+ or +/
+            if (buffer[i] == '+' && rules->doBlockCommentD) {
+                if (i > 0 && buffer[i - 1] == '/') {
+                    i = end;
+                    continue;
+                }
+                if (end + 1 < (int)buffer.size() && buffer[end + 1] == '/') {
+                    i = end;
+                    continue;
+                }
+            }
+            // skip = that forms part of Julia block comment #= or =#
+            if (buffer[i] == '=' && rules->doBlockCommentJulia) {
+                if (i > 0 && buffer[i - 1] == '#') {
+                    i = end;
+                    continue;
+                }
+                if (end + 1 < (int)buffer.size() && buffer[end + 1] == '#') {
+                    i = end;
+                    continue;
+                }
+            }
+
             if (colourSymbol(i, end)) {
 
                 insert += 27;
@@ -1798,6 +1821,16 @@ void Engine::doParsing() {
         parseBlockCommentPLI();
     if (rules->doBlockCommentHaskell)
         parseBlockCommentHaskell();
+    if (rules->doBlockCommentLua)
+        parseBlockCommentLua();
+    if (rules->doBlockCommentPowerShell)
+        parseBlockCommentPowerShell();
+    if (rules->doBlockCommentJulia)
+        parseBlockCommentJulia();
+    if (rules->doBlockCommentNim)
+        parseBlockCommentNim();
+    if (rules->doBlockCommentD)
+        parseBlockCommentD();
     if (rules->doHtmlTags)
         parseHtmlTags();
 

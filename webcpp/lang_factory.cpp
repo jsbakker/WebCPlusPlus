@@ -16,56 +16,66 @@ using std::string;
 uint8_t LanguageFactory::getLanguageId(const string &filename) {
 
     static const std::unordered_map<string, uint8_t> extensionMap = {
-        {"adb", lang::ADA_FILE},     {"ads", lang::ADA_FILE},
-        {"ali", lang::ADA_FILE},     {"asm", lang::ASM_FILE},
-        {"s", lang::ASM_FILE},       {"asp", lang::ASP_FILE},
-        {"asa", lang::ASP_FILE},     {"bas", lang::BAS_FILE},
-        {"bat", lang::DOS_FILE},     {"cmd", lang::DOS_FILE},
-        {"c", lang::C99_FILE},       {"rc", lang::C99_FILE},
-        {"cc", lang::CPP_FILE},      {"cpp", lang::CPP_FILE},
-        {"coo", lang::CPP_FILE},     {"c++", lang::CPP_FILE},
-        {"cxx", lang::CPP_FILE},     {"h", lang::CPP_FILE},
-        {"hh", lang::CPP_FILE},      {"hpp", lang::CPP_FILE},
-        {"hxx", lang::CPP_FILE},     {"cg", lang::C4G_FILE},
-        {"clp", lang::CLP_FILE},     {"cs", lang::CSP_FILE},
-        {"m", lang::OBC_FILE},       {"mm", lang::OCP_FILE},
-        {"emf", lang::EMF_FILE},     {"e", lang::EU4_FILE},
-        {"eu", lang::EU4_FILE},      {"ex", lang::EU4_FILE},
-        {"f", lang::FTN_FILE},       {"for", lang::FTN_FILE},
-        {"ftn", lang::FTN_FILE},     {"f77", lang::FTN_FILE},
-        {"f90", lang::FTN_FILE},     {"hs", lang::HSK_FILE},
-        {"lhs", lang::HSK_FILE},     {"shtm", lang::HTM_FILE},
-        {"html", lang::HTM_FILE},    {"htm", lang::HTM_FILE},
-        {"sgml", lang::HTM_FILE},    {"xml", lang::XML_FILE},
-        {"java", lang::JAV_FILE},    {"js", lang::JSC_FILE},
-        {"def", lang::MOD_FILE},     {"mod", lang::MOD_FILE},
-        {"pas", lang::PAS_FILE},     {"cgi", lang::PRL_FILE},
-        {"plex", lang::PRL_FILE},    {"plx", lang::PRL_FILE},
-        {"pl", lang::PRL_FILE},      {"pm", lang::PRL_FILE},
-        {"inc", lang::PHP_FILE},     {"php4", lang::PHP_FILE},
-        {"php3", lang::PHP_FILE},    {"php", lang::PHP_FILE},
-        {"pbl", lang::PB6_FILE},     {"pbr", lang::PB6_FILE},
-        {"pyw", lang::PYT_FILE},     {"py", lang::PYT_FILE},
-        {"sl", lang::RND_FILE},      {"rib", lang::RND_FILE},
-        {"rb", lang::RUB_FILE},      {"sql", lang::SQL_FILE},
-        {"sh", lang::UNX_FILE},      {"swift", lang::SWF_FILE},
-        {"tcl", lang::TCL_FILE},     {"tk", lang::TCL_FILE},
-        {"uc", lang::UNR_FILE},      {"v", lang::VHD_FILE},
-        {"vhdl", lang::VHD_FILE},    {"vhd", lang::VHD_FILE},
-        {"css", lang::CSS_FILE},     {"rs", lang::RST_FILE},
-        {"go", lang::GOL_FILE},      {"ts", lang::TSC_FILE},
-        {"tsx", lang::TSC_FILE},     {"kt", lang::KOT_FILE},
-        {"kts", lang::KOT_FILE},     {"vala", lang::VLA_FILE},
-        {"vapi", lang::VLA_FILE},    {"zig", lang::ZIG_FILE},
-        {"glsl", lang::GLS_FILE},    {"vert", lang::GLS_FILE},
-        {"frag", lang::GLS_FILE},    {"geom", lang::GLS_FILE},
-        {"tesc", lang::GLS_FILE},    {"tese", lang::GLS_FILE},
-        {"comp", lang::GLS_FILE},    {"hlsl", lang::HLS_FILE},
-        {"hlsli", lang::HLS_FILE},   {"r", lang::R_FILE},
-        {"feature", lang::GHK_FILE}, {"fs", lang::FSH_FILE},
-        {"fsi", lang::FSH_FILE},     {"fsx", lang::FSH_FILE},
-        {"scala", lang::SCA_FILE},   {"sc", lang::SCA_FILE},
-        {"ml", lang::OML_FILE},      {"mli", lang::OML_FILE}};
+        {"adb", lang::ADA_FILE},    {"ads", lang::ADA_FILE},
+        {"ali", lang::ADA_FILE},    {"asm", lang::ASM_FILE},
+        {"s", lang::ASM_FILE},      {"asp", lang::ASP_FILE},
+        {"asa", lang::ASP_FILE},    {"bas", lang::BAS_FILE},
+        {"bat", lang::DOS_FILE},    {"cmd", lang::DOS_FILE},
+        {"c", lang::C99_FILE},      {"rc", lang::C99_FILE},
+        {"cc", lang::CPP_FILE},     {"cpp", lang::CPP_FILE},
+        {"coo", lang::CPP_FILE},    {"c++", lang::CPP_FILE},
+        {"cxx", lang::CPP_FILE},    {"h", lang::CPP_FILE},
+        {"hh", lang::CPP_FILE},     {"hpp", lang::CPP_FILE},
+        {"hxx", lang::CPP_FILE},    {"cg", lang::C4G_FILE},
+        {"clp", lang::CLP_FILE},    {"cs", lang::CSP_FILE},
+        {"m", lang::OBC_FILE},      {"mm", lang::OCP_FILE},
+        {"emf", lang::EMF_FILE},    {"e", lang::EU4_FILE},
+        {"eu", lang::EU4_FILE},     {"f", lang::FTN_FILE},
+        {"for", lang::FTN_FILE},    {"ftn", lang::FTN_FILE},
+        {"f77", lang::FTN_FILE},    {"f90", lang::FTN_FILE},
+        {"hs", lang::HSK_FILE},     {"lhs", lang::HSK_FILE},
+        {"shtm", lang::HTM_FILE},   {"html", lang::HTM_FILE},
+        {"htm", lang::HTM_FILE},    {"sgml", lang::HTM_FILE},
+        {"xml", lang::XML_FILE},    {"java", lang::JAV_FILE},
+        {"js", lang::JSC_FILE},     {"def", lang::MOD_FILE},
+        {"mod", lang::MOD_FILE},    {"pas", lang::PAS_FILE},
+        {"cgi", lang::PRL_FILE},    {"plex", lang::PRL_FILE},
+        {"plx", lang::PRL_FILE},    {"pl", lang::PRL_FILE},
+        {"pm", lang::PRL_FILE},     {"inc", lang::PHP_FILE},
+        {"php4", lang::PHP_FILE},   {"php3", lang::PHP_FILE},
+        {"php", lang::PHP_FILE},    {"pbl", lang::PB6_FILE},
+        {"pbr", lang::PB6_FILE},    {"pyw", lang::PYT_FILE},
+        {"py", lang::PYT_FILE},     {"sl", lang::RND_FILE},
+        {"rib", lang::RND_FILE},    {"rb", lang::RUB_FILE},
+        {"sql", lang::SQL_FILE},    {"sh", lang::UNX_FILE},
+        {"swift", lang::SWF_FILE},  {"tcl", lang::TCL_FILE},
+        {"tk", lang::TCL_FILE},     {"uc", lang::UNR_FILE},
+        {"v", lang::VHD_FILE},      {"vhdl", lang::VHD_FILE},
+        {"vhd", lang::VHD_FILE},    {"css", lang::CSS_FILE},
+        {"rs", lang::RST_FILE},     {"go", lang::GOL_FILE},
+        {"ts", lang::TSC_FILE},     {"tsx", lang::TSC_FILE},
+        {"kt", lang::KOT_FILE},     {"kts", lang::KOT_FILE},
+        {"vala", lang::VLA_FILE},   {"vapi", lang::VLA_FILE},
+        {"zig", lang::ZIG_FILE},    {"glsl", lang::GLS_FILE},
+        {"vert", lang::GLS_FILE},   {"frag", lang::GLS_FILE},
+        {"geom", lang::GLS_FILE},   {"tesc", lang::GLS_FILE},
+        {"tese", lang::GLS_FILE},   {"comp", lang::GLS_FILE},
+        {"hlsl", lang::HLS_FILE},   {"hlsli", lang::HLS_FILE},
+        {"r", lang::R_FILE},        {"feature", lang::GHK_FILE},
+        {"fs", lang::FSH_FILE},     {"fsi", lang::FSH_FILE},
+        {"fsx", lang::FSH_FILE},    {"scala", lang::SCA_FILE},
+        {"sc", lang::SCA_FILE},     {"ml", lang::OML_FILE},
+        {"mli", lang::OML_FILE},    {"lua", lang::LUA_FILE},
+        {"dart", lang::DRT_FILE},   {"groovy", lang::GRV_FILE},
+        {"gradle", lang::GRV_FILE}, {"gvy", lang::GRV_FILE},
+        {"ps1", lang::PSH_FILE},    {"psm1", lang::PSH_FILE},
+        {"psd1", lang::PSH_FILE},   {"wgsl", lang::WGL_FILE},
+        {"clj", lang::CLJ_FILE},    {"cljs", lang::CLJ_FILE},
+        {"cljc", lang::CLJ_FILE},   {"edn", lang::CLJ_FILE},
+        {"ex", lang::ELX_FILE},     {"exs", lang::ELX_FILE},
+        {"jl", lang::JUL_FILE},     {"nim", lang::NIM_FILE},
+        {"nims", lang::NIM_FILE},   {"d", lang::DLG_FILE},
+        {"di", lang::DLG_FILE}};
 
     // Extract extension
     size_t dotPos = filename.find_last_of('.');
@@ -184,6 +194,26 @@ LanguageInfo LanguageFactory::createFromFilename(const string &filename) {
         return {make_unique<LangScala>(), id, "Scala file"};
     case (lang::OML_FILE):
         return {make_unique<LangOCaml>(), id, "OCaml file"};
+    case (lang::LUA_FILE):
+        return {make_unique<LangLua>(), id, "Lua script"};
+    case (lang::DRT_FILE):
+        return {make_unique<LangDart>(), id, "Dart file"};
+    case (lang::GRV_FILE):
+        return {make_unique<LangGroovy>(), id, "Groovy file"};
+    case (lang::PSH_FILE):
+        return {make_unique<LangPowerShell>(), id, "PowerShell script"};
+    case (lang::WGL_FILE):
+        return {make_unique<LangWGSL>(), id, "WGSL file"};
+    case (lang::CLJ_FILE):
+        return {make_unique<LangClojure>(), id, "Clojure file"};
+    case (lang::ELX_FILE):
+        return {make_unique<LangElixir>(), id, "Elixir file"};
+    case (lang::JUL_FILE):
+        return {make_unique<LangJulia>(), id, "Julia file"};
+    case (lang::NIM_FILE):
+        return {make_unique<LangNim>(), id, "Nim file"};
+    case (lang::DLG_FILE):
+        return {make_unique<LangD>(), id, "D file"};
     default:
         return {make_unique<LangText>(), id, "Text file"};
     }
