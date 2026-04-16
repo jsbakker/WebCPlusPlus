@@ -129,8 +129,12 @@ C#\t\t*.cs\n\
 C Source\t*.c,*.rc\n\
 C++ Source\t*.cc,*.cpp,*.cxx\n\
 C/C++ Header\t*.h,*.hh,*.hpp,*.hxx\n\
+Clojure\t\t*.clj,*.cljs,*.cljc,*.edn\n\
 CSS\t\t*.css\n\
+D\t\t*.d\n\
+Dart\t\t*.dart\n\
 DOS Batch\t*.bat,*.cmd\n\
+Elixir\t\t*.ex,*.exs\n\
 EMF\t\t*.emf\n\
 Euphoria\t*.e,*.eu,*.ex\n\
 F#\t\t*.fs,*.fsi,*.fsx\n\
@@ -138,14 +142,18 @@ Fortran\t\t*.f,*.f77,*.f90,*.for,*.ftn\n\
 Gherkin\t\t*.feature\n\
 GLSL\t\t*.glsl,*.vert,*.frag,*.geom,*.tesc,*.tese,*.comp\n\
 Go\t\t*.go\n\
+Groovy\t\t*.groovy,*.gvy,*.gradle\n\
 Haskell\t\t*.hs,*.lhs\n\
 HLSL\t\t*.hlsl,*.hlsli\n\
 Java\t\t*.java\n\
 JavaScript\t*.js\n\
+Julia\t\t*.jl\n\
 Kotlin\t\t*.kt,*.kts\n\
+Lua\t\t*.lua\n\
 Markup\t\t*.htm,*.html,*.shtml,*.sgml\n\
-Modula2\t\t*.def,*.mod\n\
+Modula\t\t*.def,*.mod\n\
 Nasa CLIPS\t*.clp\n\
+Nim\t\t*.nim,*.nims\n\
 NVidia Cg\t*.cg\n\
 Objective-C\t*.m\n\
 Objective-C++\t*.mm\n\
@@ -154,6 +162,7 @@ Pascal\t\t*.pas\n\
 Perl\t\t*.cgi,*.pl,*.plx,*.plex,*.pm\n\
 PHP\t\t*.inc,*.php,*.php3,*.php4\n\
 Power Builder\t*.pbl,*.pbr\n\
+PowerShell\t*.ps1,*.psm1,*.psd1\n\
 Python\t\t*.py,*.pyw\n\
 R\t\t*.r\n\
 RenderMan\t*.rib,*.sl\n\
@@ -168,6 +177,7 @@ Unix shell\t*.sh\n\
 UnrealScript\t*.uc\n\
 Vala\t\t*.vala,*.vapi\n\
 VHDL\t\t*.v,*.vhd,*.vhdl\n\
+WGSL\t\t*.wgsl\n\
 XML\t\t*.xml\n\
 Zig\t\t*.zig\n";
 

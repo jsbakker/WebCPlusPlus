@@ -187,6 +187,21 @@ class Engine {
     inline void parseBlockCommentHaskell() {
         parseBlockComment("{-", "-}", state.inComment);
     }
+    inline void parseBlockCommentLua() {
+        parseBlockComment("--[[", "]]", state.inComment);
+    }
+    inline void parseBlockCommentPowerShell() {
+        parseBlockComment("&lt;#", "#&gt;", state.inComment);
+    }
+    inline void parseBlockCommentJulia() {
+        parseBlockComment("#=", "=#", state.inComment);
+    }
+    inline void parseBlockCommentNim() {
+        parseBlockComment("#[", "]#", state.inComment);
+    }
+    inline void parseBlockCommentD() {
+        parseBlockComment("/+", "+/", state.inComment);
+    }
     inline void parseHtmlTags() {
         parseBlockComment("&lt;", "&gt;", state.inHtmTags);
     }

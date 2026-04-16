@@ -35,6 +35,11 @@ class LanguageRules {
         doBlockCommentHaskell = false;
         doBlockCommentPascal = false;
         doBlockCommentPLI = false;
+        doBlockCommentLua = false;
+        doBlockCommentPowerShell = false;
+        doBlockCommentJulia = false;
+        doBlockCommentNim = false;
+        doBlockCommentD = false;
         doInlineCommentDblSlash = false;
         doInlineCommentHash = false;
         doInlineCommentSemiColon = false;
@@ -85,6 +90,11 @@ class LanguageRules {
     bool doBlockCommentMarkup;
     bool doBlockCommentPascal;
     bool doBlockCommentPLI;
+    bool doBlockCommentLua;
+    bool doBlockCommentPowerShell;
+    bool doBlockCommentJulia;
+    bool doBlockCommentNim;
+    bool doBlockCommentD;
     bool doInlineCommentDblSlash;
     bool doInlineCommentDblDash;
     bool doInlineCommentHash;

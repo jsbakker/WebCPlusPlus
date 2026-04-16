@@ -55,6 +55,16 @@
 #include "langvhdl.h"
 #include "langxml.h"
 #include "langzig.h"
+#include "langlua.h"
+#include "langdart.h"
+#include "langgroovy.h"
+#include "langpowershell.h"
+#include "langwgsl.h"
+#include "langclojure.h"
+#include "langelixir.h"
+#include "langjulia.h"
+#include "langnim.h"
+#include "langd.h"
 
 #include <cstdint>
 
@@ -108,6 +118,16 @@ inline constexpr std::uint8_t GHK_FILE = 0x3A;
 inline constexpr std::uint8_t FSH_FILE = 0x3B;
 inline constexpr std::uint8_t SCA_FILE = 0x3C;
 inline constexpr std::uint8_t OML_FILE = 0x3D;
+inline constexpr std::uint8_t LUA_FILE = 0x3E;
+inline constexpr std::uint8_t DRT_FILE = 0x3F;
+inline constexpr std::uint8_t GRV_FILE = 0x40;
+inline constexpr std::uint8_t PSH_FILE = 0x42;
+inline constexpr std::uint8_t WGL_FILE = 0x44;
+inline constexpr std::uint8_t CLJ_FILE = 0x46;
+inline constexpr std::uint8_t ELX_FILE = 0x47;
+inline constexpr std::uint8_t JUL_FILE = 0x48;
+inline constexpr std::uint8_t NIM_FILE = 0x49;
+inline constexpr std::uint8_t DLG_FILE = 0x4A;
 } // namespace lang
 
 #endif //_DEF_LANGS_H
