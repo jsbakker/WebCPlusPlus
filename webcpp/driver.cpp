@@ -147,6 +147,7 @@ Haskell\t\t*.hs,*.lhs\n\
 HLSL\t\t*.hlsl,*.hlsli\n\
 Java\t\t*.java\n\
 JavaScript\t*.js\n\
+JSON\t\t*.json,*.jsonc,*.json5\n\
 Julia\t\t*.jl\n\
 Kotlin\t\t*.kt,*.kts\n\
 Lua\t\t*.lua\n\
@@ -172,6 +173,7 @@ Scala\t\t*.scala,*.sc\n\
 SQL\t\t*.sql\n\
 Swift\t\t*.swift\n\
 Tcl\t\t*.tcl,*.tk\n\
+TOML\t\t*.toml\n\
 TypeScript\t*.ts,*.tsx\n\
 Unix shell\t*.sh\n\
 UnrealScript\t*.uc\n\
@@ -179,6 +181,7 @@ Vala\t\t*.vala,*.vapi\n\
 VHDL\t\t*.v,*.vhd,*.vhdl\n\
 WGSL\t\t*.wgsl\n\
 XML\t\t*.xml\n\
+YAML\t\t*.yaml,*.yml\n\
 Zig\t\t*.zig\n";
 
     cerr << "Web C Plus Plus v0.9.0  "

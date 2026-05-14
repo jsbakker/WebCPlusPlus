@@ -75,7 +75,10 @@ uint8_t LanguageFactory::getLanguageId(const string &filename) {
         {"ex", lang::ELX_FILE},     {"exs", lang::ELX_FILE},
         {"jl", lang::JUL_FILE},     {"nim", lang::NIM_FILE},
         {"nims", lang::NIM_FILE},   {"d", lang::DLG_FILE},
-        {"di", lang::DLG_FILE}};
+        {"di", lang::DLG_FILE},    {"json", lang::JSN_FILE},
+        {"jsonc", lang::JSN_FILE}, {"json5", lang::JSN_FILE},
+        {"toml", lang::TML_FILE},  {"yaml", lang::YML_FILE},
+        {"yml", lang::YML_FILE}};
 
     // Extract extension
     size_t dotPos = filename.find_last_of('.');
@@ -214,6 +217,12 @@ LanguageInfo LanguageFactory::createFromFilename(const string &filename) {
         return {make_unique<LangNim>(), id, "Nim file"};
     case (lang::DLG_FILE):
         return {make_unique<LangD>(), id, "D file"};
+    case (lang::JSN_FILE):
+        return {make_unique<LangJson>(), id, "JSON file"};
+    case (lang::TML_FILE):
+        return {make_unique<LangToml>(), id, "TOML file"};
+    case (lang::YML_FILE):
+        return {make_unique<LangYaml>(), id, "YAML file"};
     default:
         return {make_unique<LangText>(), id, "Text file"};
     }

@@ -65,6 +65,9 @@
 #include "langjulia.h"
 #include "langnim.h"
 #include "langd.h"
+#include "langjson.h"
+#include "langtoml.h"
+#include "langyaml.h"
 
 #include <cstdint>
 
@@ -128,6 +131,9 @@ inline constexpr std::uint8_t ELX_FILE = 0x47;
 inline constexpr std::uint8_t JUL_FILE = 0x48;
 inline constexpr std::uint8_t NIM_FILE = 0x49;
 inline constexpr std::uint8_t DLG_FILE = 0x4A;
+inline constexpr std::uint8_t JSN_FILE = 0x4B;
+inline constexpr std::uint8_t TML_FILE = 0x4C;
+inline constexpr std::uint8_t YML_FILE = 0x4E;
 } // namespace lang
 
 #endif //_DEF_LANGS_H
