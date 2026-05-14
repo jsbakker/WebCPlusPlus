@@ -42,6 +42,7 @@ support other projects.
 |HLSL		              |.hlsl, .hlsli|
 |Java		              |.java|
 |JavaScript	          |.js|
+|JSON                 |.json, .jsonc, .json5|
 |Julia                |.jl|
 |Kotlin		            |.kt, .kts|
 |Lua                  |.lua|
@@ -67,6 +68,7 @@ support other projects.
 |SQL		              |.sql|
 |Swift		            |.swift|
 |Tcl		              |.tcl, .tk|
+|TOML                 |.toml|
 |TypeScript	          |.ts, .tsx|
 |Unix shell	          |.sh|
 |UnrealScript	        |.uc|
@@ -74,6 +76,7 @@ support other projects.
 |VHDL		              |.v, .vhd, .vhdl|
 |WGSL                 |.wgsl|
 |XML		              |.xml|
+|YAML                 |.yaml, .yml|
 |Zig		              |.zig|
 
 
